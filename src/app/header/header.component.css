@@ -19,3 +19,13 @@
 .nav-ul li i {
     margin-right: 2px;
 }
+
+.nav-login-bt {
+    color: #a6c2e4;
+    border-color: #a6c2e4;
+}
+
+.nav-login-bt:focus, .nav-login-bt:hover {
+    color: #fff;
+    border-color: #fff;
+}
