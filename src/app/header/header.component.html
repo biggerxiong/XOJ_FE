@@ -1,7 +1,7 @@
 <nz-header style="position:fixed; width:100%">
   <div class="logo"></div>
   <ul class="nav-ul" nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
-    <li nz-menu-item>
+    <li routerLink='/home'  nz-menu-item>
       <i nz-icon nzType="home" nzTheme="fill"></i>
       主页
     </li>
@@ -18,7 +18,7 @@
       记录
     </li>
     <li class="nav-right" nz-menu-item>
-      <button class="nav-login-bt" nz-button [nzType]="'default'" [nzGhost]="true" [nzSize]="'large'">登陆</button>
+      <button routerLink='/login' class="nav-login-bt" nz-button [nzType]="'default'" [nzGhost]="true" [nzSize]="'large'">登陆</button>
     </li>
   </ul>
 </nz-header>
