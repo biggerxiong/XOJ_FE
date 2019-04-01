@@ -11,6 +11,14 @@ import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { HeaderComponent } from './header/header.component';
 
+import { IconDefinition } from '@ant-design/icons-angular';
+import { NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS } from 'ng-zorro-antd';
+
+// 引入你需要的图标，比如你需要 fill 主题的 AccountBook Alert 和 outline 主题的 Alert，推荐 ✔️
+import { BookFill, TrophyFill, PieChartFill } from '@ant-design/icons-angular/icons';
+
+const icons: IconDefinition[] = [ BookFill, TrophyFill, PieChartFill ];
+
 registerLocaleData(zh);
 
 @NgModule({
@@ -26,7 +34,11 @@ registerLocaleData(zh);
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [
+    { provide: NZ_I18N, useValue: zh_CN },
+    { provide: NZ_ICON_DEFAULT_TWOTONE_COLOR, useValue: '#00ff00' }, // 不提供的话，即为 Ant Design 的主题蓝色
+    { provide: NZ_ICONS, useValue: icons }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

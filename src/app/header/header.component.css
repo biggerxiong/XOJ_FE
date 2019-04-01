@@ -15,3 +15,7 @@
 .nav-right {
     float: right;
 }
+
+.nav-ul li i {
+    margin-right: 2px;
+}
