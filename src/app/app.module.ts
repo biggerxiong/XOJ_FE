@@ -16,6 +16,7 @@ import { NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS } from 'ng-zorro-antd';
 
 // 引入你需要的图标，比如你需要 fill 主题的 AccountBook Alert 和 outline 主题的 Alert，推荐 ✔️
 import { BookFill, TrophyFill, PieChartFill, HomeFill } from '@ant-design/icons-angular/icons';
+import { FooterComponent } from './footer/footer.component';
 
 const icons: IconDefinition[] = [ HomeFill, BookFill, TrophyFill, PieChartFill ];
 
@@ -24,7 +25,8 @@ registerLocaleData(zh);
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
