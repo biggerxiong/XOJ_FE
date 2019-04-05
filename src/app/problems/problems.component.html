@@ -1,0 +1,30 @@
+<div *ngIf="problemIntros">
+  <nz-table #basicTable [nzData]="problemIntros">
+    <thead>
+      <tr>
+        <th>编号</th>
+        <th>题目</th>
+        <th>通过</th>
+        <th>通过率</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.id }}</td>
+        <td><a routerLink="/problem/{{ data.id }}">{{ data.title }}</a></td>
+        <td>{{ data.accept }}</td>
+        <td>{{ data.accept / data.submit }}</td>
+        <!-- <td>
+          <a>Action 一 {{ data.name }}</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a>Delete</a>
+        </td> -->
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
+
+<div *ngIf="!problemIntros" class="loading-content">
+  <ng-template #indicatorTemplate><i nz-icon type="loading" style="font-size: 44px;"></i> </ng-template>
+    <nz-spin nzSimple [nzIndicator]="indicatorTemplate"> </nz-spin>
+</div>

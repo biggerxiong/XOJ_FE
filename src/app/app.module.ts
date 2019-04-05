@@ -20,6 +20,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProblemsComponent } from './problems/problems.component';
 
 const icons: IconDefinition[] = [ HomeFill, BookFill, TrophyFill, PieChartFill, MailOutline ];
 
@@ -31,7 +32,8 @@ registerLocaleData(zh);
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    ProblemsComponent
   ],
   imports: [
     BrowserModule,
