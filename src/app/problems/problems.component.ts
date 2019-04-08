@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProblemIntroService } from "../problem-intro.service";
+import { ProblemService } from "../problem.service";
 import { ProblemIntro } from '../problemIntro';
 
 @Component({
@@ -12,10 +12,10 @@ export class ProblemsComponent implements OnInit {
 
   problemIntros: ProblemIntro[];
 
-  constructor(private problemIntroService: ProblemIntroService) { }
+  constructor(private problemIntroService: ProblemService) { }
 
   ngOnInit() {
-    this.problemIntroService.getProblems()
+    this.problemIntroService.getProblemIntros()
       .subscribe(problemIntros => this.problemIntros = problemIntros);
   }
 
