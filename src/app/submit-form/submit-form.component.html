@@ -1,0 +1,33 @@
+
+<!-- 提交代码表单 -->
+<div class="form-container">
+  <form nz-form (ngSubmit)="onSubmit()" #answerForm="ngForm">
+    <nz-form-item class="form-group">
+      <nz-form-label [nzSpan]="4" nzFor="language">语言</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <nz-select nzSize="large" class="form-language-selector" [(ngModel)]="submitCode.language" id="language" name="language" required>
+          <nz-option *ngFor="let language of languages" nzValue="{{language.value}}" nzLabel="{{language.name}}"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item class="form-group">
+      <nz-form-label [nzSpan]="4" nzFor="codeArea" [nzRequired]="true">代码: </nz-form-label>
+      <nz-form-control [nzSpan]="18">
+          <textarea nzSize="large" rows="10" nz-input class="form-code-area" [(ngModel)]="submitCode.code" id="codeArea" name="source" required #source="ngModel">
+
+          </textarea>
+          <nz-form-explain *ngIf="!(source.valid || source.pristine)" class="alert alert-danger">
+            代码不能为空
+          </nz-form-explain>
+      </nz-form-control>
+       
+    </nz-form-item>
+    <nz-form-item nz-row style="margin-bottom:8px;">
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <button nz-button  nzValue="large" nzType="primary" [disabled]="!answerForm.form.valid">交付评测</button>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- <button type="submit" class="btn btn-success">Submit</button> -->
+  </form>
+</div>

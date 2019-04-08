@@ -8,6 +8,7 @@
   <nz-layout *ngIf="problemDetail != null">
     <nz-layout>
       <nz-content class="problem-detail-content">
+        <!-- 题目信息 -->
         <div class="problem-detail-content-title">{{ problemDetail.id }} &nbsp;{{ problemDetail.title }}</div>
         <div class="problem-display-title">题目描述</div>
         <div class="problem-display-content" [innerHTML]="problemDescription"></div>
@@ -16,6 +17,7 @@
         <div class="problem-display-title">输出格式</div>
         <div class="problem-display-content" [innerHTML]="problemOutputDescription"></div>
 
+        <!-- 输入样例 -->
         <div class="problem-display-sample-container">
           <div class="problem-display-sample-case-container" *ngFor="let sample of samples;let i=index">
             <div class="problem-display-sample-input">
@@ -29,11 +31,16 @@
           </div>
         </div>
 
+        <!-- 代码提示 -->
         <div class="problem-display-title">提示</div>
         <div class="problem-display-content" [innerHTML]="problemHint"></div>
+
+        <!-- 提交表单 -->
+        <app-submit-form></app-submit-form>
       </nz-content>
     </nz-layout>
     
+    <!-- 右边的题目信息 -->
     <nz-sider class="problem-detail-sider" [nzWidth]="300">
       <nz-list id="problem-detail-sider-list" [nzItemLayout]="'vertical'" [nzSize]="'large'">
         <nz-list-item>

@@ -22,6 +22,7 @@ import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProblemsComponent } from './problems/problems.component';
 import { ProblemComponent } from './problem/problem.component';
+import { SubmitFormComponent } from './submit-form/submit-form.component';
 
 const icons: IconDefinition[] = [ HomeFill, BookFill, TrophyFill, PieChartFill, MailOutline ];
 
@@ -35,7 +36,8 @@ registerLocaleData(zh);
     LoginComponent,
     HomeComponent,
     ProblemsComponent,
-    ProblemComponent
+    ProblemComponent,
+    SubmitFormComponent
   ],
   imports: [
     BrowserModule,

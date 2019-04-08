@@ -38,10 +38,6 @@ export class ProblemComponent implements OnInit {
         this.problemDescription = this.sanitizer.bypassSecurityTrustHtml(this.problemDetail.description);
         this.samples = JSON.parse(this.problemDetail.samples)
       });
-
-    
   }
-
-  
 
 }
