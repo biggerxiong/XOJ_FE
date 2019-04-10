@@ -36,7 +36,7 @@
         <div class="problem-display-content" [innerHTML]="problemHint"></div>
 
         <!-- 提交表单 -->
-        <app-submit-form></app-submit-form>
+        <app-submit-form [problemId]="problemDetail.id" (submit)="onSubmit($event)"></app-submit-form>
       </nz-content>
     </nz-layout>
     

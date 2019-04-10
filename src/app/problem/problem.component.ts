@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { ProblemService }  from '../problem.service';
 import { ProblemDetail } from '../problemDetail';
 import { DomSanitizer } from '@angular/platform-browser';
+import { SubmitCode } from '../model/submit/submit-code';
 
 @Component({
   selector: 'app-problem',
@@ -40,4 +41,11 @@ export class ProblemComponent implements OnInit {
       });
   }
 
+  onSubmit(submitCode: SubmitCode) {
+    // console.log(submitCode)
+    this.problemService.submitCode(submitCode)
+      .subscribe(result => {
+        console.log(result)
+      })
+  }
 }

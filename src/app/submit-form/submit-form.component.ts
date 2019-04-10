@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CodeLanguage } from '../model/submit/code-language';
 import { SubmitCode } from '../model/submit/submit-code';
 
@@ -10,6 +10,7 @@ import { SubmitCode } from '../model/submit/submit-code';
 })
 export class SubmitFormComponent implements OnInit {
   @Input() problemId: number;
+  @Output() submit = new EventEmitter<SubmitCode>();
 
   languages: CodeLanguage[] = [
     new CodeLanguage(0, "G++"),
@@ -21,9 +22,10 @@ export class SubmitFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.submitCode.problemId = this.problemId
   }
 
   onSubmit() {
-
+    this.submit.emit(this.submitCode);
   }
 }

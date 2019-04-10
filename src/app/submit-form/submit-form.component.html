@@ -1,9 +1,9 @@
 
 <!-- 提交代码表单 -->
 <div class="form-container">
-  <form nz-form (ngSubmit)="onSubmit()" #answerForm="ngForm">
+  <form nz-form #answerForm="ngForm" onsubmit="false">
     <nz-form-item>
-      <input type="hidden" nz-input name="problemId" [(ngModel)]="submitCode.problemId" />
+      <input type="hidden" nz-input name="problemId" [(ngModel)]="submitCode.problemId" value="{{submitCode.problemId}}"/>
     </nz-form-item>
     <nz-form-item class="form-group">
       <nz-form-label [nzSpan]="4" nzFor="language">语言</nz-form-label>
@@ -17,7 +17,7 @@
     <nz-form-item class="form-group">
       <nz-form-label [nzSpan]="4" nzFor="codeArea" [nzRequired]="true">代码</nz-form-label>
       <nz-form-control [nzSpan]="18">
-          <textarea nzSize="large" rows="10" nz-input class="form-code-area" [(ngModel)]="submitCode.code" id="codeArea" name="source" required #source="ngModel">
+          <textarea nzSize="large" rows="10" nz-input class="form-code-area" [(ngModel)]="submitCode.source" id="codeArea" name="source" required #source="ngModel">
 
           </textarea>
           <nz-form-explain *ngIf="!(source.valid || source.pristine)" class="alert alert-danger">
@@ -28,7 +28,7 @@
     </nz-form-item>
     <nz-form-item nz-row style="margin-bottom:8px;">
       <nz-form-control [nzSpan]="14" [nzOffset]="6">
-        <button nz-button  nzValue="large" nzType="primary" [disabled]="!answerForm.form.valid">交付评测</button>
+        <button nz-button (click)="onSubmit()" nzValue="large" nzType="primary" [disabled]="!answerForm.form.valid">交付评测</button>
       </nz-form-control>
     </nz-form-item>
     <!-- <button type="submit" class="btn btn-success">Submit</button> -->

@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ProblemIntro } from "./problemIntro";
 import { ProblemDetail } from "./problemDetail";
 import { Observable, of } from 'rxjs';
+import { SubmitCode } from './model/submit/submit-code';
+import { Result } from './model/http/result';
 
 const problemIntros: ProblemIntro[] = [
   {id: 1000, title: "A+B problem", submit: 11, accept: 2},
@@ -23,8 +26,11 @@ const problemDetails: ProblemDetail[] = [
 })
 
 export class ProblemService {
+  private submitUrl = "http://localhost:8090/submit"
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+  ) { }
 
   getProblemIntros(): Observable<ProblemIntro[]> {
     return of(problemIntros);
@@ -32,5 +38,19 @@ export class ProblemService {
 
   getProblemDetail(id: number): Observable<ProblemDetail> {
     return of(problemDetails.find(problemDetail => problemDetail.id === id))
+  }
+
+  submitCode(submitCode: SubmitCode): Observable<Result>  {
+    console.log(submitCode)
+    const body: HttpParams = new HttpParams()
+      .set('source', encodeURIComponent(submitCode.source))
+      .set('language', submitCode.language.toString())
+      .set('problemId', submitCode.problemId.toString())
+    console.log(body)
+    return this.http.post<Result>(this.submitUrl, body, 
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+      })
   }
 }
