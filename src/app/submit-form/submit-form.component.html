@@ -2,6 +2,9 @@
 <!-- 提交代码表单 -->
 <div class="form-container">
   <form nz-form (ngSubmit)="onSubmit()" #answerForm="ngForm">
+    <nz-form-item>
+      <input type="hidden" nz-input name="problemId" [(ngModel)]="submitCode.problemId" />
+    </nz-form-item>
     <nz-form-item class="form-group">
       <nz-form-label [nzSpan]="4" nzFor="language">语言</nz-form-label>
       <nz-form-control [nzSpan]="18">
