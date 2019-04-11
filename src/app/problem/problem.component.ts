@@ -31,13 +31,13 @@ export class ProblemComponent implements OnInit {
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.problemService.getProblemDetail(id)
-      .subscribe(problemDetail => {
-        this.problemDetail = problemDetail;
+      .subscribe(result => {
+        this.problemDetail = result.data;
         this.problemInputDescription = this.sanitizer.bypassSecurityTrustHtml(this.problemDetail.inputDescription);
         this.problemOutputDescription = this.sanitizer.bypassSecurityTrustHtml(this.problemDetail.outputDescription);
         this.problemHint = this.sanitizer.bypassSecurityTrustHtml(this.problemDetail.hint);
         this.problemDescription = this.sanitizer.bypassSecurityTrustHtml(this.problemDetail.description);
-        this.samples = JSON.parse(this.problemDetail.samples)
+        this.samples = JSON.parse(this.problemDetail.samples.replace("\n", "\\r\\n"))
       });
   }
 

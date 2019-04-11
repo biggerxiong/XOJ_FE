@@ -1,5 +1,5 @@
 export class ProblemDetail {
-    id: number;
+    problemId: number;
     title: string;
     description: string;
     inputDescription: string;
@@ -14,4 +14,5 @@ export class ProblemDetail {
     testcaseCount: number;
     timeLimit: number;
     memoryLimit: number;
+    problemType: number;
   }

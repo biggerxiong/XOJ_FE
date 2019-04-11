@@ -9,7 +9,7 @@
     <nz-layout>
       <nz-content class="problem-detail-content">
         <!-- 题目信息 -->
-        <div class="problem-detail-content-title">{{ problemDetail.id }} &nbsp;{{ problemDetail.title }}</div>
+        <div class="problem-detail-content-title">{{ problemDetail.problemId }} &nbsp;{{ problemDetail.title }}</div>
         <div class="problem-display-title">题目描述</div>
         <div class="problem-display-content" [innerHTML]="problemDescription"></div>
         <div class="problem-display-title">输入格式</div>
@@ -32,11 +32,13 @@
         </div>
 
         <!-- 代码提示 -->
-        <div class="problem-display-title">提示</div>
-        <div class="problem-display-content" [innerHTML]="problemHint"></div>
+        <div *ngIf="problemHint === ''" >
+          <div class="problem-display-title">提示</div>
+          <div class="problem-display-content" [innerHTML]="problemHint"></div>
+        </div>
 
         <!-- 提交表单 -->
-        <app-submit-form [problemId]="problemDetail.id" (submit)="onSubmit($event)"></app-submit-form>
+        <app-submit-form [problemId]="problemDetail.problemId" (submit)="onSubmit($event)"></app-submit-form>
       </nz-content>
     </nz-layout>
     
