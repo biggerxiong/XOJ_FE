@@ -1,4 +1,4 @@
-<nz-layout  class="problem-detail-container">
+<nz-layout  class="problem-detail-container" style="height:1300px">
   <nz-layout *ngIf="problemDetail == null">
     <nz-skeleton [nzLoading]="true" [nzActive]="true">
         
@@ -39,6 +39,13 @@
 
         <!-- 提交表单 -->
         <app-submit-form [problemId]="problemDetail.problemId" (submit)="onSubmit($event)"></app-submit-form>
+
+        <div class="problem-display-judge-status" *ngIf="judgeStatus" >
+            <i *ngIf="iconType === 0" nz-icon [nzType]="'sync'" [nzSpin]="true"></i>
+            <i *ngIf="iconType === 1" nz-icon [nzType]="'smile'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#52c41a'"></i>
+            <i *ngIf="iconType === 2" nz-icon [nzType]="'frown'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'"></i>
+            <p class="problem-display-judge-status-message {{statusMessageClass}}">{{ judgeStatus.judgeStatusResult }}</p> 
+        </div>
       </nz-content>
     </nz-layout>
     

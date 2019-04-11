@@ -29,6 +29,7 @@ export class ProblemService {
   private submitUrl = "http://localhost:8090/submit"
   private problemListUrl = "http://localhost:8090/problems"
   private problemDetailUrl = "http://localhost:8090/problem/"
+  private judgeStatusUrl = "http://localhost:8090/status/"
 
   constructor(
     private http: HttpClient,
@@ -44,6 +45,10 @@ export class ProblemService {
 
   getProblemDetail(id: number): Observable<Result> {
     return this.http.get<Result>(this.problemDetailUrl + id);
+  }
+
+  getJudgeStatus(id: number): Observable<Result> {
+    return this.http.get<Result>(this.judgeStatusUrl + id);
   }
 
   submitCode(submitCode: SubmitCode): Observable<Result>  {

@@ -6,6 +6,7 @@ import { ProblemService }  from '../problem.service';
 import { ProblemDetail } from '../problemDetail';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SubmitCode } from '../model/submit/submit-code';
+import { JudgeStatus } from '../model/submit/judge-status';
 
 @Component({
   selector: 'app-problem',
@@ -20,6 +21,11 @@ export class ProblemComponent implements OnInit {
   problemHint: any;
   problemDescription: any;
   samples: JSON;
+  judgeStatus: JudgeStatus
+  intervalCode: number
+  iconType: number
+  statusMessageClass: string
+  
 
   constructor(
     private route: ActivatedRoute,
@@ -43,9 +49,37 @@ export class ProblemComponent implements OnInit {
 
   onSubmit(submitCode: SubmitCode) {
     // console.log(submitCode)
+    this.iconType = 0
+    this.statusMessageClass = "normal"
+    if (this.judgeStatus) this.judgeStatus.judgeStatusResult = "submit"
     this.problemService.submitCode(submitCode)
       .subscribe(result => {
-        console.log(result)
+        this.judgeStatus = result.data
+        console.log(this.judgeStatus)
+        this.iconType = 0
+        this.queryJudgeStatus()
       })
+
+    
+  }
+
+  queryJudgeStatus() {
+    if (this.judgeStatus) {
+      this.problemService.getJudgeStatus(this.judgeStatus.id).subscribe(result => {
+        this.judgeStatus = result.data
+        console.log(this.judgeStatus)
+        if (this.judgeStatus.judgeStatusCode == 0) {
+          this.queryJudgeStatus();
+        } else if (this.judgeStatus.judgeStatusCode == 7) {
+          this.statusMessageClass = "accept"
+          this.iconType = 1
+        } else {
+          this.statusMessageClass = "reject"
+          this.iconType = 2
+        }
+      })
+    } else {
+      this.queryJudgeStatus();
+    }
   }
 }
