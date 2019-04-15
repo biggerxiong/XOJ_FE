@@ -1,15 +1,7 @@
-.ant-layout-has-sider {
-    background-color: #fff;
-}
 
 .ant-statistic {
     text-align: center;
 }
-
-.ant-statistic-title {
-    font-size: 17px;
-}
-
 .ant-statistic-content-value {
     font-size: 30px;
 }
@@ -25,9 +17,18 @@
 #problem-detail-sider-list {
     padding: 10px 20px;
     background-color: #fff;
-    box-shadow: 0 1px 0 #ffffff, 0 1px 4px rgba(0,0,0,0.2);
-    border-radius: 30px;
+    /* box-shadow: 0 1px 0 #ffffff, 0 1px 4px rgba(0,0,0,0.2);
+    border-radius: 30px; */
     position: inherit;
+    border-radius: 15px;
+    -webkit-box-shadow: 0 0.375rem 1.375rem rgba(175,194,201,.5);
+    box-shadow: 0 0.375rem 1.375rem rgba(175,194,201,.5);
+    -webkit-transition: opacity .5s,-webkit-transform .5s;
+    transition: opacity .5s,-webkit-transform .5s;
+    transition: transform .5s,opacity .5s;
+    transition: transform .5s,opacity .5s,-webkit-transform .5s;
+    -webkit-transition-timing-function: cubic-bezier(.215,.61,.355,1);
+    transition-timing-function: cubic-bezier(.215,.61,.355,1);
 }
 
 pre {
@@ -69,7 +70,6 @@ code {
 
 .problem-display-judge-status-message {
     margin-left: 10px;
-    font-size: 17px;
     line-height: 1;
 }
 
@@ -130,33 +130,37 @@ code {
 
 .problem-display-sample-case-container pre {
     margin-left: 25px;
-    font-size: 17px;
 }
 
 .problem-display-content {
     margin: 20px 25px 30px 25px;
-    font-size: 17px;
     line-height: 24px;
 }
 
 .problem-detail-container {
     padding: 0 24px;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
 }
 
-.problem-detail-content {
+.problem-detail-left .container{
+    margin-bottom: 16px;
+}
+
+.problem-detail-content, .problem-detail-submit-form{
+    padding: 25px 45px;
     background-color: #ffffff;
+    border-radius: 15px;
+    -webkit-box-shadow: 0 0.375rem 1.375rem rgba(175,194,201,.5);
+    box-shadow: 0 0.375rem 1.375rem rgba(175,194,201,.5);
+    -webkit-transition: opacity .5s,-webkit-transform .5s;
+    transition: opacity .5s,-webkit-transform .5s;
+    transition: transform .5s,opacity .5s;
+    transition: transform .5s,opacity .5s,-webkit-transform .5s;
+    -webkit-transition-timing-function: cubic-bezier(.215,.61,.355,1);
+    transition-timing-function: cubic-bezier(.215,.61,.355,1);
 }
 
 .problem-detail-content-title {
     font-size: 28px;
     font-weight: 500;
-}
-
-.problem-detail-sider {
-    padding: 10px 20px;
-    background-color: #fff;
-    /* box-shadow: 0 1px 0 #ffffff, 0 1px 4px rgba(0,0,0,0.2);
-    border-radius: 30px; */
-    position: inherit;
 }

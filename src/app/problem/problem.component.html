@@ -1,13 +1,13 @@
-<nz-layout  class="problem-detail-container" style="height:1300px">
-  <nz-layout *ngIf="problemDetail == null">
+<div  class="problem-detail-container">
+  <div *ngIf="problemDetail == null">
     <nz-skeleton [nzLoading]="true" [nzActive]="true">
         
     </nz-skeleton>
-  </nz-layout> 
+  </div> 
 
-  <nz-layout *ngIf="problemDetail != null">
-    <nz-layout>
-      <nz-content class="problem-detail-content">
+  <div *ngIf="problemDetail != null" nz-row nzGutter="16">
+    <div class="problem-detail-left" nz-col nzSpan="18">
+      <div class="problem-detail-content container">
         <!-- 题目信息 -->
         <div class="problem-detail-content-title">{{ problemDetail.problemId }} &nbsp;{{ problemDetail.title }}</div>
         <div class="problem-display-title">题目描述</div>
@@ -16,7 +16,7 @@
         <div class="problem-display-content" [innerHTML]="problemInputDescription"></div>
         <div class="problem-display-title">输出格式</div>
         <div class="problem-display-content" [innerHTML]="problemOutputDescription"></div>
-
+  
         <!-- 输入样例 -->
         <div class="problem-display-sample-container">
           <div class="problem-display-sample-case-container" *ngFor="let sample of samples;let i=index">
@@ -30,54 +30,63 @@
             </div>
           </div>
         </div>
-
+  
         <!-- 代码提示 -->
         <div *ngIf="problemHint === ''" >
           <div class="problem-display-title">提示</div>
           <div class="problem-display-content" [innerHTML]="problemHint"></div>
         </div>
+  
+        
+      </div>
 
-        <!-- 提交表单 -->
+      <!-- 提交表单 -->
+      <div class="problem-detail-submit-form container">
         <app-submit-form [problemId]="problemDetail.problemId" (submit)="onSubmit($event)"></app-submit-form>
-
+    
         <div class="problem-display-judge-status" *ngIf="judgeStatus" >
             <i *ngIf="iconType === 0" nz-icon [nzType]="'sync'" [nzSpin]="true"></i>
             <i *ngIf="iconType === 1" nz-icon [nzType]="'smile'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#52c41a'"></i>
             <i *ngIf="iconType === 2" nz-icon [nzType]="'frown'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'"></i>
             <p class="problem-display-judge-status-message {{statusMessageClass}}">{{ judgeStatus.judgeStatusResult }}</p> 
         </div>
-      </nz-content>
-    </nz-layout>
+      </div>
+    </div>
     
-    <!-- 右边的题目信息 -->
-    <nz-sider class="problem-detail-sider" [nzWidth]="300">
-      <nz-list id="problem-detail-sider-list" [nzItemLayout]="'vertical'" [nzSize]="'large'">
-        <nz-list-item>
-            <nz-statistic nzValue="{{ problemDetail.accept }}" [nzTitle]="'通过 / 提交'" nzSuffix="/ {{ problemDetail.submit }}"></nz-statistic>
-        </nz-list-item>
-        <nz-list-item class="problem-info-list-container">
-          <div class="problem-info-list-title">时间限制</div>
-          <div class="problem-info-list-content">{{ problemDetail.timeLimit }} MS</div>
-        </nz-list-item>
-        <nz-list-item class="problem-info-list-container">
-          <div class="problem-info-list-title">空间限制</div>
-          <div class="problem-info-list-content">{{ problemDetail.memoryLimit }} MB</div>
-        </nz-list-item>
-        <nz-list-item class="problem-info-list-container">
-          <div class="problem-info-list-title">来源</div>
-          <div class="problem-info-list-content">{{ problemDetail.timeLimit }} MS</div>
-        </nz-list-item>
-        <nz-list-item class="problem-info-list-container">
-          <div class="problem-info-list-title">标签</div>
-          <div class="problem-info-list-content">{{ problemDetail.timeLimit }} MS</div>
-        </nz-list-item>
-        <nz-list-item class="problem-info-list-container">
-          <div class="problem-info-list-title">题目提供者</div>
-          <div class="problem-info-list-content">
-            <a>{{ problemDetail.createBy }}</a>
-          </div>
-        </nz-list-item>
-      </nz-list>
-    </nz-sider>
-  </nz-layout>
-</nz-layout >
+    <!-- 右边的内容 -->
+    <div class="problem-detail-right" nz-col nzSpan="6">
+      <div class="problem-detail-sider">
+        <nz-list id="problem-detail-sider-list" [nzItemLayout]="'vertical'" [nzSize]="'large'">
+          <nz-list-item>
+              <nz-statistic nzValue="{{ problemDetail.accept }}" [nzTitle]="'通过 / 提交'" nzSuffix="/ {{ problemDetail.submit }}"></nz-statistic>
+          </nz-list-item>
+          <nz-list-item class="problem-info-list-container">
+            <div class="problem-info-list-title">时间限制</div>
+            <div class="problem-info-list-content">{{ problemDetail.timeLimit }} MS</div>
+          </nz-list-item>
+          <nz-list-item class="problem-info-list-container">
+            <div class="problem-info-list-title">空间限制</div>
+            <div class="problem-info-list-content">{{ problemDetail.memoryLimit }} MB</div>
+          </nz-list-item>
+          <nz-list-item class="problem-info-list-container">
+            <div class="problem-info-list-title">来源</div>
+            <div class="problem-info-list-content">{{ problemDetail.timeLimit }} MS</div>
+          </nz-list-item>
+          <nz-list-item class="problem-info-list-container">
+            <div class="problem-info-list-title">标签</div>
+            <div class="problem-info-list-content">{{ problemDetail.timeLimit }} MS</div>
+          </nz-list-item>
+          <nz-list-item class="problem-info-list-container">
+            <div class="problem-info-list-title">题目提供者</div>
+            <div class="problem-info-list-content">
+              <a>{{ problemDetail.createBy }}</a>
+            </div>
+          </nz-list-item>
+        </nz-list>
+      </div>
+    </div>
+    
+  </div>
+
+  
+</div >
