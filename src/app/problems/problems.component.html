@@ -17,6 +17,7 @@
           <td *ngIf="data.problemType === 0" >本地</td>
           <td *ngIf="data.problemType === 1" >青岛OJ</td>
           <td>{{ data.accept }}</td>
+          <td>{{ data.submit }}</td>
           <td>{{ getPercent(data.accept, data.submit) }}</td>
           <!-- <td>
             <a>Action 一 {{ data.name }}</a>

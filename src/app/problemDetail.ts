@@ -1,3 +1,5 @@
+import { User } from './model/User';
+
 export class ProblemDetail {
     problemId: number;
     title: string;
@@ -9,7 +11,7 @@ export class ProblemDetail {
     submit: number;
     accept: number;
     createTime: string;
-    createBy: string;
+    createBy: User;
     ioMode: string;
     testcaseCount: number;
     timeLimit: number;

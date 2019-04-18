@@ -5,7 +5,7 @@
     </nz-skeleton>
   </div> 
 
-  <div *ngIf="problemDetail != null" nz-row nzGutter="16">
+  <div *ngIf="problemDetail != null" nz-row nzGutter="24">
     <div class="problem-detail-left" nz-col nzSpan="18">
       <div class="problem-detail-content container">
         <!-- 题目信息 -->
@@ -79,7 +79,7 @@
           <nz-list-item class="problem-info-list-container">
             <div class="problem-info-list-title">题目提供者</div>
             <div class="problem-info-list-content">
-              <a>{{ problemDetail.createBy }}</a>
+              <a href="/user/{{problemDetail.createBy.id}}">{{ problemDetail.createBy.userName }}</a>
             </div>
           </nz-list-item>
         </nz-list>

@@ -7,6 +7,7 @@ import { ProblemDetail } from '../problemDetail';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SubmitCode } from '../model/submit/submit-code';
 import { JudgeStatus } from '../model/submit/judge-status';
+import { User } from '../model/User';
 
 @Component({
   selector: 'app-problem',
@@ -25,6 +26,7 @@ export class ProblemComponent implements OnInit {
   intervalCode: number
   iconType: number
   statusMessageClass: string
+  createBy: User
   
 
   constructor(
