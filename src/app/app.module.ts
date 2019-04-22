@@ -14,6 +14,8 @@ import { HeaderComponent } from './header/header.component';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS } from 'ng-zorro-antd';
 
+import { httpInterceptorProviders } from "./interceptors/index";
+
 // 引入你需要的图标，比如你需要 fill 主题的 AccountBook Alert 和 outline 主题的 Alert，推荐 ✔️
 import { BookFill, TrophyFill, PieChartFill, HomeFill, MailOutline, SmileTwoTone, SyncOutline, FrownTwoTone } from '@ant-design/icons-angular/icons';
 import { FooterComponent } from './footer/footer.component';
@@ -51,7 +53,8 @@ registerLocaleData(zh);
   providers: [
     { provide: NZ_I18N, useValue: zh_CN },
     { provide: NZ_ICON_DEFAULT_TWOTONE_COLOR, useValue: '#00ff00' }, // 不提供的话，即为 Ant Design 的主题蓝色
-    { provide: NZ_ICONS, useValue: icons }
+    { provide: NZ_ICONS, useValue: icons },
+    httpInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })
