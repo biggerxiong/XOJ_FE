@@ -1,4 +1,5 @@
 import { User } from './model/User';
+import { ProblemType } from './model/problem/problem-type';
 
 export class ProblemDetail {
     problemId: number;
@@ -16,5 +17,5 @@ export class ProblemDetail {
     testcaseCount: number;
     timeLimit: number;
     memoryLimit: number;
-    problemType: number;
+    problemType: ProblemType;
   }

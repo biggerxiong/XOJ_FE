@@ -1,12 +1,13 @@
 <div class="problem-list-container">
   <div *ngIf="problemIntros">
-    <nz-table #basicTable [nzData]="problemIntros">
+    <nz-table #basicTable [nzData]="problemIntros" >
       <thead>
         <tr>
           <th>编号</th>
           <th>题目</th>
           <th>来源</th>
           <th>通过</th>
+          <th>提交</th>
           <th>通过率</th>
         </tr>
       </thead>
@@ -14,16 +15,12 @@
         <tr *ngFor="let data of basicTable.data">
           <td>{{ data.problemId }}</td>
           <td><a routerLink="/problem/{{ data.problemId }}">{{ data.title }}</a></td>
-          <td *ngIf="data.problemType === 0" >本地</td>
-          <td *ngIf="data.problemType === 1" >青岛OJ</td>
+          <!-- <td *ngIf="data.problemType.problemTypeId === 0" >本地</td>
+          <td *ngIf="data.problemType === 1" >青岛OJ</td> -->
+          <td>{{ data.problemType.problemTypeName }}</td>
           <td>{{ data.accept }}</td>
           <td>{{ data.submit }}</td>
           <td>{{ getPercent(data.accept, data.submit) }}</td>
-          <!-- <td>
-            <a>Action 一 {{ data.name }}</a>
-            <nz-divider nzType="vertical"></nz-divider>
-            <a>Delete</a>
-          </td> -->
         </tr>
       </tbody>
     </nz-table>
