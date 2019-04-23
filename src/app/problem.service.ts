@@ -46,7 +46,6 @@ export class ProblemService {
       .set('source', encodeURIComponent(submitCode.source))
       .set('language', String(submitCode.language))
       .set('problemId', String(submitCode.problemId))
-    console.log(body)
     return this.http.post<Result>(this.submitUrl, body, 
       {
         headers: new HttpHeaders()

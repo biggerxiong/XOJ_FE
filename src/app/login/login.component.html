@@ -5,9 +5,8 @@
         <nz-input-group nzSize="large" [nzPrefix]="prefixUser">
           <input type="text" nz-input formControlName="userName" placeholder="用户名" />
         </nz-input-group>
-        <nz-form-explain *ngIf="validateForm.get('userName')?.dirty && validateForm.get('userName')?.errors"
-          >请输入用户名！</nz-form-explain
-        >
+        <nz-form-explain *ngIf="validateForm.get('userName')?.dirty && validateForm.get('userName')?.errors">请输入用户名！</nz-form-explain>
+        <nz-form-explain style="color:red" *ngIf="isLoginFailed">{{ loginFailedMsg }}</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -15,9 +14,7 @@
         <nz-input-group nzSize="large" [nzPrefix]="prefixLock">
           <input type="password" nz-input formControlName="password" placeholder="密码" />
         </nz-input-group>
-        <nz-form-explain *ngIf="validateForm.get('password')?.dirty && validateForm.get('password')?.errors"
-          >请输入密码！</nz-form-explain
-        >
+        <nz-form-explain *ngIf="validateForm.get('password')?.dirty && validateForm.get('password')?.errors">请输入密码！</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -29,7 +26,7 @@
         <ng-template #titleTemplate>
           <i nz-icon type="mail" style="margin-right: 8px" nzTheme="outline"></i> <span>请联系管理员: me@xiongxuan.me</span>
         </ng-template>
-        <button nz-button class="login-form-button" [nzType]="'primary'">登陆</button>
+        <button nz-button class="login-form-button" [nzType]="'primary'" [nzLoading]="isLoading">登陆</button>
       </nz-form-control>
     </nz-form-item>
   </form>

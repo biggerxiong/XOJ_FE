@@ -18,7 +18,8 @@ export class GlobalExceptionInterceptor implements HttpInterceptor {
         
         return <any>next.handle(req).pipe(
             mergeMap((event: any) => {
-                if (event instanceof HttpResponse && event.body.code !== 1) {
+                if (event instanceof HttpResponse && event.status !== 200) {
+                    console.log("event: ", event)
                     return Observable.create(observer => observer.error(event));
                 }
                 return Observable.create(observer => observer.next(event));
@@ -30,10 +31,10 @@ export class GlobalExceptionInterceptor implements HttpInterceptor {
                         // 权限处理
                         this.router.navigateByUrl('/login');
                         break;
-                    case 200:
-                        // 业务层级错误处理
-                        this.globalMessageService.createErrorMessage(`发生错误，错误信息为：${res.body.msg}`);
-                        break;
+                    // case 200:
+                    //     // 业务层级错误处理
+                    //     this.globalMessageService.createErrorMessage(`发生错误，错误信息为：${res.body.msg}`);
+                    //     break;
                     case 404:
                         this.globalMessageService.createErrorMessage(`API不存在`);
                         break;
