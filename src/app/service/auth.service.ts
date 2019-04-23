@@ -17,8 +17,8 @@ const httpOptions = {
 })
 
 export class AuthService {
-  public loggedIn = false
-  public currentUser: User
+  private loggedIn = false
+  private currentUser: User
 
   constructor(private router: Router, 
     private globalUrlService: GlobalUrlService,
@@ -37,7 +37,12 @@ export class AuthService {
 
   decodeUserFromToken(token: string): User {
     const jsonString = atob(token.split('.')[1])
-    return JSON.parse(jsonString)
+    const jsonObject = JSON.parse(jsonString)
+    const user = new User()
+    user.id = jsonObject['userId']
+    user.userName = jsonObject['sub']
+
+    return user
   }
 
   login(userName: string, password: string, callback: Function) {
@@ -45,11 +50,27 @@ export class AuthService {
     this.http.post<Result>(this.globalUrlService.getLoginUrl(),
       {"userName": userName, "password": password}, httpOptions)
       .subscribe(result => {
-        console.log("login-result: ", result)
         if (result.code === 1) {
-          localStorage.setItem("token", result.msg)
+          const token = result.msg
+          localStorage.setItem("token", token)
+          this.loggedIn = true
+          this.currentUser = this.decodeUserFromToken(token)
         }
         callback(result.code, result.msg)
       })
+  }
+
+  logout() {
+    this.loggedIn = false
+    localStorage.removeItem("token")
+    this.currentUser = null
+  }
+
+  getCurrentUser(): User {
+    return this.currentUser
+  }
+
+  isLoggedIn(): boolean {
+    return this.loggedIn
   }
 }

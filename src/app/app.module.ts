@@ -25,6 +25,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProblemsComponent } from './problems/problems.component';
 import { ProblemComponent } from './problem/problem.component';
 import { SubmitFormComponent } from './submit-form/submit-form.component';
+import { NzDropDownModule } from 'ng-zorro-antd';
+import { NzModalModule } from 'ng-zorro-antd';
 
 const icons: IconDefinition[] = [ HomeFill, BookFill, TrophyFill, PieChartFill, MailOutline, SmileTwoTone, SyncOutline, FrownTwoTone ];
 
@@ -48,7 +50,9 @@ registerLocaleData(zh);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzDropDownModule,
+    NzModalModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN },

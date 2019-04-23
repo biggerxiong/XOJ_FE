@@ -5,11 +5,15 @@ import { Router } from '@angular/router';
 import { mergeMap, catchError } from "rxjs/operators";
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Injectable()
 export class GlobalExceptionInterceptor implements HttpInterceptor {
 
-    constructor(private globalMessageService: GlobalMessageService, private router: Router) {
+    constructor(
+        private globalMessageService: GlobalMessageService, 
+        private router: Router,
+        private authService: AuthService) {
 
     }
 
@@ -29,7 +33,8 @@ export class GlobalExceptionInterceptor implements HttpInterceptor {
                     case 401:
                     case 403:
                         // 权限处理
-                        this.router.navigateByUrl('/login');
+                        this.router.navigateByUrl('/login')
+                        this.authService.logout()
                         break;
                     // case 200:
                     //     // 业务层级错误处理

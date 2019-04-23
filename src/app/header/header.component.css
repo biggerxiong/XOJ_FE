@@ -29,3 +29,13 @@
     color: #fff;
     border-color: #fff;
 }
+
+.nav-right-dropdown {
+    color: #a6c2e4;
+    border-color: #a6c2e4;
+}
+
+.nav-right-dropdown:focus, .nav-right-dropdown:hover {
+    color: #fff;
+    border-color: #fff;
+}
