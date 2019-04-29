@@ -42,7 +42,7 @@
 
       <!-- 提交表单 -->
       <div class="problem-detail-submit-form container">
-        <app-submit-form [problemId]="problemDetail.problemId" (submit)="onSubmit($event)"></app-submit-form>
+        <app-submit-form [problemId]="problemDetail.problemId" (update)="updateJudgeStatus()"></app-submit-form>
     
         <div class="problem-display-judge-status" *ngIf="judgeStatus" >
             <i *ngIf="iconType === 0" nz-icon [nzType]="'sync'" [nzSpin]="true"></i>

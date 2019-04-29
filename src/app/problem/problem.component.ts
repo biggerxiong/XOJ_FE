@@ -49,18 +49,18 @@ export class ProblemComponent implements OnInit {
       });
   }
 
-  onSubmit(submitCode: SubmitCode) {
-    // console.log(submitCode)
-    this.iconType = 0
-    this.statusMessageClass = "normal"
-    if (this.judgeStatus) this.judgeStatus.judgeStatusResult = "submit"
-    this.problemService.submitCode(submitCode)
-      .subscribe(result => {
-        this.judgeStatus = result.data
-        console.log(this.judgeStatus)
-        this.iconType = 0
-        this.queryJudgeStatus()
-      })
+  updateJudgeStatus(judgeStatus: JudgeStatus) {
+    console.log('update: ', judgeStatus)
+    // this.iconType = 0
+    // this.statusMessageClass = "normal"
+    // if (this.judgeStatus) this.judgeStatus.judgeStatusResult = "submit"
+    // this.problemService.submitCode(submitCode)
+    //   .subscribe(result => {
+    //     this.judgeStatus = result.data
+    //     console.log(this.judgeStatus)
+    //     this.iconType = 0
+    //     this.queryJudgeStatus()
+    //   })
 
     
   }

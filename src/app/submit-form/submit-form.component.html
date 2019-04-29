@@ -1,14 +1,14 @@
 
 <!-- 提交代码表单 -->
 <div class="form-container">
-  <form nz-form #answerForm="ngForm" onsubmit="false">
+  <form nz-form #answerForm="ngForm" (submit)="submitProblem()">
     <nz-form-item>
       <input type="hidden" nz-input name="problemId" [(ngModel)]="submitCode.problemId" value="{{submitCode.problemId}}"/>
     </nz-form-item>
     <nz-form-item class="form-group">
       <nz-form-label [nzSpan]="4" nzFor="language">语言</nz-form-label>
       <nz-form-control [nzSpan]="18">
-        <nz-select nzSize="large" class="form-language-selector" [(ngModel)]="submitCode.language" id="language" name="language" required>
+        <nz-select nzSize="large" class="form-language-selector" [(ngModel)]="submitCode.language" id="languageId" name="languageId" required>
           <nz-option *ngFor="let language of languages" nzValue="{{language.value}}" nzLabel="{{language.name}}"></nz-option>
         </nz-select>
       </nz-form-control>
@@ -28,7 +28,7 @@
     </nz-form-item>
     <nz-form-item nz-row style="margin-bottom:8px;">
       <nz-form-control [nzSpan]="14" [nzOffset]="6">
-        <button nz-button (click)="onSubmit()" nzValue="large" nzType="primary" [disabled]="!answerForm.form.valid">交付评测</button>
+        <button nz-button nzValue="large" nzType="primary" [nzLoading]="isLoading" [disabled]="!answerForm.form.valid">交付评测</button>
       </nz-form-control>
     </nz-form-item>
     <!-- <button type="submit" class="btn btn-success">Submit</button> -->

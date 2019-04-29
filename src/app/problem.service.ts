@@ -41,15 +41,8 @@ export class ProblemService {
   }
 
   submitCode(submitCode: SubmitCode): Observable<Result>  {
-    // console.log(submitCode)
-    const body: HttpParams = new HttpParams()
-      .set('source', encodeURIComponent(submitCode.source))
-      .set('language', String(submitCode.language))
-      .set('problemId', String(submitCode.problemId))
-    return this.http.post<Result>(this.submitUrl, body, 
-      {
-        headers: new HttpHeaders()
-          .set('Content-Type', 'application/x-www-form-urlencoded')
-      })
+    const submitCodeTemp = submitCode
+    submitCodeTemp.source = encodeURIComponent(submitCodeTemp.source)
+    return this.http.post<Result>(this.submitUrl, submitCodeTemp)
   }
 }
