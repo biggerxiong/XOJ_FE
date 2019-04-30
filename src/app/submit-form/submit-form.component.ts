@@ -16,11 +16,11 @@ export class SubmitFormComponent implements OnInit {
   isLoading = false
 
   languages: CodeLanguage[] = [
-    new CodeLanguage(0, "G++"),
-    new CodeLanguage(1, "GCC"),
-    new CodeLanguage(4, "Pascal")
+    new CodeLanguage(1, "G++"),
+    new CodeLanguage(2, "GCC"),
+    new CodeLanguage(3, "Pascal")
   ];
-  submitCode: SubmitCode = new SubmitCode(0, "", this.problemId);
+  submitCode: SubmitCode = new SubmitCode(1, "", this.problemId);
 
   constructor(
     private problemService: ProblemService
@@ -28,6 +28,7 @@ export class SubmitFormComponent implements OnInit {
 
   ngOnInit() {
     this.submitCode.problemId = this.problemId
+    this.submitCode.languageId = 1
   }
 
   submitProblem() {

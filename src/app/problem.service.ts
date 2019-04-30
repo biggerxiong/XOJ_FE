@@ -41,8 +41,8 @@ export class ProblemService {
   }
 
   submitCode(submitCode: SubmitCode): Observable<Result>  {
-    const submitCodeTemp = submitCode
-    submitCodeTemp.source = encodeURIComponent(submitCodeTemp.source)
+    const submitCodeTemp: SubmitCode = new SubmitCode(submitCode.languageId, encodeURIComponent(submitCode.source), submitCode.problemId)
+    // submitCodeTemp.source = encodeURIComponent(submitCodeTemp.source)
     return this.http.post<Result>(this.submitUrl, submitCodeTemp)
   }
 }

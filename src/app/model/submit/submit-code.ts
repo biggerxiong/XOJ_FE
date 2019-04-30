@@ -1,7 +1,7 @@
 export class SubmitCode {
 
     constructor(
-        public language: number,
+        public languageId: number,
         public source: string,
         public problemId: number
     ) {}
