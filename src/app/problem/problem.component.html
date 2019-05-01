@@ -42,14 +42,11 @@
 
       <!-- 提交表单 -->
       <div class="problem-detail-submit-form container">
-        <app-submit-form [problemId]="problemDetail.problemId" (update)="updateJudgeStatus()"></app-submit-form>
-    
-        <div class="problem-display-judge-status" *ngIf="judgeStatus" >
-            <i *ngIf="iconType === 0" nz-icon [nzType]="'sync'" [nzSpin]="true"></i>
-            <i *ngIf="iconType === 1" nz-icon [nzType]="'smile'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#52c41a'"></i>
-            <i *ngIf="iconType === 2" nz-icon [nzType]="'frown'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'"></i>
-            <p class="problem-display-judge-status-message {{statusMessageClass}}">{{ judgeStatus.judgeStatusResult }}</p> 
-        </div>
+        <app-submit-form [problemId]="problemDetail.problemId" (update)="updateJudgeStatus($event)"></app-submit-form>
+      </div>
+
+      <div *ngIf="showJudgeStatus"  class="problem-detail-judge-status container">
+        <app-problem-detail-status [judgeStatusId]="judgeStatusId"></app-problem-detail-status>
       </div>
     </div>
     

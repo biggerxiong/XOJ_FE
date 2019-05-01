@@ -12,7 +12,7 @@ import { JudgeStatus } from '../model/submit/judge-status';
 })
 export class SubmitFormComponent implements OnInit {
   @Input() problemId: number
-  @Output() update = new EventEmitter<JudgeStatus>()
+  @Output() update = new EventEmitter<number>()
   isLoading = false
 
   languages: CodeLanguage[] = [
@@ -37,7 +37,7 @@ export class SubmitFormComponent implements OnInit {
       .subscribe(result => {
         const judgeStatus: JudgeStatus = result.data
         console.log(judgeStatus)
-        this.update.emit(judgeStatus)
+        this.update.emit(judgeStatus.judgeStatusId)
         this.isLoading = false
       })
   }

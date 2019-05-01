@@ -27,6 +27,7 @@ import { ProblemComponent } from './problem/problem.component';
 import { SubmitFormComponent } from './submit-form/submit-form.component';
 import { NzDropDownModule } from 'ng-zorro-antd';
 import { NzModalModule } from 'ng-zorro-antd';
+import { StatusComponent } from './pages/problem/status/status.component';
 
 const icons: IconDefinition[] = [ HomeFill, BookFill, TrophyFill, PieChartFill, MailOutline, SmileTwoTone, SyncOutline, FrownTwoTone ];
 
@@ -41,7 +42,8 @@ registerLocaleData(zh);
     HomeComponent,
     ProblemsComponent,
     ProblemComponent,
-    SubmitFormComponent
+    SubmitFormComponent,
+    StatusComponent
   ],
   imports: [
     BrowserModule,

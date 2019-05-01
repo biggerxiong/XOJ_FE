@@ -27,6 +27,9 @@ export class ProblemComponent implements OnInit {
   iconType: number
   statusMessageClass: string
   createBy: User
+
+  showJudgeStatus: boolean = false
+  judgeStatusId: number
   
 
   constructor(
@@ -49,8 +52,11 @@ export class ProblemComponent implements OnInit {
       });
   }
 
-  updateJudgeStatus(judgeStatus: JudgeStatus) {
-    console.log('update: ', judgeStatus)
+  updateJudgeStatus(judgeStatusId: number) {
+    console.log('update: ', judgeStatusId)
+
+    this.showJudgeStatus = true
+    this.judgeStatusId = judgeStatusId
     // this.iconType = 0
     // this.statusMessageClass = "normal"
     // if (this.judgeStatus) this.judgeStatus.judgeStatusResult = "submit"
@@ -66,22 +72,22 @@ export class ProblemComponent implements OnInit {
   }
 
   queryJudgeStatus() {
-    if (this.judgeStatus) {
-      this.problemService.getJudgeStatus(this.judgeStatus.id).subscribe(result => {
-        this.judgeStatus = result.data
-        console.log(this.judgeStatus)
-        if (this.judgeStatus.judgeStatusCode == 0) {
-          this.queryJudgeStatus();
-        } else if (this.judgeStatus.judgeStatusCode == 7) {
-          this.statusMessageClass = "accept"
-          this.iconType = 1
-        } else {
-          this.statusMessageClass = "reject"
-          this.iconType = 2
-        }
-      })
-    } else {
-      this.queryJudgeStatus();
-    }
+    // if (this.judgeStatus) {
+    //   this.problemService.getJudgeStatus(this.judgeStatus.judgeStatusId).subscribe(result => {
+    //     this.judgeStatus = result.data
+    //     console.log(this.judgeStatus)
+    //     if (this.judgeStatus.judgeStatusCode == 0) {
+    //       this.queryJudgeStatus();
+    //     } else if (this.judgeStatus.judgeStatusCode == 7) {
+    //       this.statusMessageClass = "accept"
+    //       this.iconType = 1
+    //     } else {
+    //       this.statusMessageClass = "reject"
+    //       this.iconType = 2
+    //     }
+    //   })
+    // } else {
+    //   this.queryJudgeStatus();
+    // }
   }
 }

@@ -1,13 +1,20 @@
+import { User } from '../User';
+import { ProblemDetail } from 'src/app/problemDetail';
+import { CodeLanguage } from './code-language';
+import { TestCaseResult } from './test-case-result';
+
 export class JudgeStatus {
-    id: number
-    problemId: number
-    userName: string
+    judgeStatusId: number
+    problem: ProblemDetail
+    user: User
     remoteId: string
-    judgeStatusCode: number
-    judgeStatusResult: string
-    judgeStatusLanguage: number
-    judgeStatusTime: number
-    judgeStatusMemory: number
-    judgeStatusMessage: string
+    language: CodeLanguage
+    codeFilePath: string
+    score: number
+    error: number
+    result: string
+    timeCost: number
+    memoryCost: number
     createTime: Date
+    errorMsg: string
 }

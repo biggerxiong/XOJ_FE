@@ -1,0 +1,30 @@
+
+.problem-detail-judge-status-title {
+    margin-left: 10px;
+    line-height: 1;
+    display: inline;
+}
+
+.normal {
+    color: gray
+}
+
+.accept {
+    color: #5eb95e
+}
+
+.reject {
+    color: #e74c3c
+}
+
+.compile-error {
+    color: #f1c40f
+}
+
+.time-limit, .memory-limit {
+    color: #2E468C
+}
+
+.runtime-error {
+    color: #8e44ad
+}

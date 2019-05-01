@@ -1,0 +1,50 @@
+<div class="problem-detail-judge-status-container">
+  <nz-card *ngIf="judgeStatus.error === 0" [nzBordered]="false" [nzTitle]="inQueueTitleTemplate"></nz-card>
+
+  <nz-card *ngIf="judgeStatus.error === 1" [nzBordered]="false" [nzTitle]="judgeStatusTitleTemplate">
+    <div class="problem-detail-judge-status-result">
+      <nz-table #basicTable [nzData]="testCaseResults" [nzHideOnSinglePage]="true">
+        <thead>
+          <tr>
+            <th [nzAlign]="'center'">id</th>
+            <th [nzAlign]="'center'">status</th>
+            <th [nzAlign]="'center'">time</th>
+            <th [nzAlign]="'center'">memory</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of basicTable.data index as i">
+              <th [nzAlign]="'center'">{{ i }}</th>
+              <th class="{{ statusCss[data.result + 1] }}" [nzAlign]="'center'">{{ statusDesc[data.result + 1] }}</th>
+              <th [nzAlign]="'center'">{{ data.cpuTime }} ms</th>
+              <th [nzAlign]="'center'">{{ getPercent(data.memory / 1024 / 1024) }} MB</th>
+            </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </nz-card> 
+  <nz-card *ngIf="judgeStatus.error === 2 || judgeStatus.error === 3" [nzBordered]="false" [nzTitle]="compileErrorTitleTemplate" >
+    <p >{{ judgeStatus.errorMsg }}</p>
+  </nz-card> 
+
+  <ng-template #inQueueTitleTemplate>
+      <i nz-icon [nzType]="'sync'" [nzSpin]="true"></i>
+      <h3 class="problem-detail-judge-status-title normal">In Queue</h3>
+    </ng-template>
+
+  <ng-template #judgeStatusTitleTemplate>
+    <div *ngIf="judgeStatus.score === 100" class="problem-detail-judge-status-title accept">
+      <i nz-icon [nzType]="'smile'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#52c41a'"></i>
+      <h3 class="problem-detail-judge-status-title accept">Score: {{ judgeStatus.score }}</h3>
+    </div>
+    <div *ngIf="judgeStatus.score !== 100" class="problem-detail-judge-status-title accept">
+      <i nz-icon [nzType]="'frown'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'"></i>
+      <h3 class="problem-detail-judge-status-title reject">Score: {{ judgeStatus.score }}</h3>
+    </div>
+  </ng-template>
+
+  <ng-template #compileErrorTitleTemplate>
+    <i nz-icon [nzType]="'frown'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'"></i>
+    <h3 class="problem-detail-judge-status-title reject">Compile Error</h3>
+  </ng-template>
+</div>

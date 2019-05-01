@@ -56,23 +56,6 @@ code {
     display: flex;
 }
 
-.problem-display-judge-status .normal {
-    color: gray
-}
-
-.problem-display-judge-status .accept {
-    color: green
-}
-
-.problem-display-judge-status .reject {
-    color: red
-}
-
-.problem-display-judge-status-message {
-    margin-left: 10px;
-    line-height: 1;
-}
-
 .problem-info-list-container {
     margin: 0 10px;
 }
@@ -146,7 +129,7 @@ code {
     margin-bottom: 24px;
 }
 
-.problem-detail-content, .problem-detail-submit-form{
+.problem-detail-content, .problem-detail-submit-form, .problem-detail-judge-status{
     padding: 25px 45px;
     background-color: #ffffff;
     border-radius: 15px;
