@@ -18,7 +18,9 @@ export class SubmitFormComponent implements OnInit {
   languages: CodeLanguage[] = [
     new CodeLanguage(1, "G++"),
     new CodeLanguage(2, "GCC"),
-    new CodeLanguage(3, "Pascal")
+    new CodeLanguage(3, "Pascal"),
+    new CodeLanguage(4, "Java"),
+    new CodeLanguage(5, "Python3")
   ];
   submitCode: SubmitCode = new SubmitCode(1, "", this.problemId);
 
