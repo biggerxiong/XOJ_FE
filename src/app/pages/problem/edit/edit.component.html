@@ -1,0 +1,149 @@
+<div class="problem-edit-container" nz-row nzGutter="24">
+
+  <!-- 左边的内容 -->
+  <div class="problem-edit-left container" nz-col nzSpan="18">
+    <div class="problem-edit-left-content">
+      <div class="problem-edit-header">
+        <nz-steps [nzCurrent]="current">
+          <nz-step *ngIf="mode == 0"  nzIcon="plus" style="cursor:pointer;" nzTitle="创建题目" (click)="changeStep(0)" ></nz-step>
+          <nz-step *ngIf="mode == 1"  nzIcon="edit" style="cursor:pointer;" nzTitle="修改题目" (click)="changeStep(0)"></nz-step>
+          <nz-step nzIcon="cloud-upload" style="cursor:pointer;" nzTitle="上传数据" (click)="changeStep(1)"></nz-step>
+        </nz-steps>
+      </div>
+      <div class="problem-edit-form-container">
+        <ng-container *ngIf="current == 0; else problemUpload">
+          <form nz-form #editForm="ngForm">
+            <!-- 题目id -->
+            <input hidden name="problemId" [(ngModel)]="problemDetail.problemId">
+            <!-- 题目名称 -->
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="title">题目名称</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24">
+                <input nz-input id="title" required minlength="4" [(ngModel)]="problemDetail.title" name="title" #title="ngModel"/>
+                <div *ngIf="title.invalid" >
+                    <nz-form-explain *ngIf="!(title.pristine || !title.errors.required)">
+                      题目不能为空
+                    </nz-form-explain>
+                    <nz-form-explain *ngIf="!(title.pristine || !title.errors.minlength)">
+                      题目长度不能少于4个字
+                    </nz-form-explain>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="timeLimit">时间限制 ms</nz-form-label>
+                <nz-form-control [nzSm]="6" [nzXs]="24" >
+                  <nz-input-number id="timeLimit" required [nzMin]="1000" [nzMax]="20000" [nzStep]="500" [(ngModel)]="problemDetail.timeLimit" name="timeLimit"></nz-input-number>
+                </nz-form-control>
+                <nz-form-label [nzSm]="5" [nzXs]="24" nzRequired nzFor="memoryLimit">内存限制 MB</nz-form-label>
+                <nz-form-control [nzSm]="6" [nzXs]="24" >
+                  <nz-input-number id="memoryLimit" required [nzMin]="32" [nzMax]="512" [nzStep]="64" [(ngModel)]="problemDetail.memoryLimit" name="memoryLimit"></nz-input-number>
+                </nz-form-control>
+            </nz-form-item>
+            <!-- 题目描述 -->
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description">题目描述</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24">
+                <textarea nz-input id="description" [(ngModel)]="problemDetail.description" 
+                  name="description" [nzAutosize]="{ minRows: 5, maxRows: 15 }" placeholder="支持markdown语法，可以使用图床哦"> 
+                </textarea>
+              </nz-form-control>
+            </nz-form-item>
+            <!-- 输入描述 -->
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="inputDescription">输入描述</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24">
+                <textarea nz-input id="inputDescription" [(ngModel)]="problemDetail.inputDescription" 
+                  name="inputDescription" [nzAutosize]="{ minRows: 5, maxRows: 15 }">
+                </textarea>
+              </nz-form-control>
+            </nz-form-item>
+            <!-- 输出描述 -->
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="outputDescription">输出描述</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24">
+                <textarea nz-input id="outputDescription" [(ngModel)]="problemDetail.outputDescription" 
+                  name="outputDescription" [nzAutosize]="{ minRows: 5, maxRows: 15 }">
+                </textarea>
+              </nz-form-control>
+            </nz-form-item>
+            <!-- 样例 -->
+            <div *ngFor="let item of testCases; let i of index" >
+              <nz-form-item nz-row [nzGutter]="{ xs: 8, sm: 8, md: 8, lg: 8, xl: 8, xxl: 8 }">
+                <nz-form-label [nzSm]="6" [nzXs]="24" >新样例</nz-form-label>
+                <nz-form-control [nzSm]="7" [nzXs]="12">
+                  <textarea nz-input [(ngModel)]="item.input" placeholder="样例输入" 
+                    name="testCaseInput{{i}}" [nzAutosize]="{ minRows: 5, maxRows: 15 }" [ngModelOptions]="{standalone: true}"></textarea>
+                </nz-form-control>
+                <nz-form-control [nzSm]="7" [nzXs]="12">
+                  <textarea nz-input [(ngModel)]="item.output" placeholder="样例输出"
+                    name="testCaseOutput{{i}}" [nzAutosize]="{ minRows: 5, maxRows: 15 }" [ngModelOptions]="{standalone: true}"></textarea>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <!-- 添加样例的按钮 -->
+            <nz-form-item nz-row>
+              <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                <button nz-button [nzSize]="'default'" nzType="'default'" (click)="addTestCase()" >增加一组样例</button>
+              </nz-form-control>
+            </nz-form-item>
+            <!-- 提示与说明 -->
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="hint">提示与说明</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24">
+                <textarea nz-input id="hint" [(ngModel)]="problemDetail.hint" 
+                  name="hint" [nzAutosize]="{ minRows: 5, maxRows: 15 }" placeholder="记得填上数据范围哦">
+                </textarea>
+              </nz-form-control>
+            </nz-form-item>
+            <!-- 提交按钮 -->
+            <nz-form-item nz-row style="margin-bottom:8px;">
+              <nz-form-control [nzSpan]="14" [nzOffset]="11">
+                <button nz-button (click)="submitForm()"  [nzSize]="'large'" nzType="primary" [nzLoading]="isLoading" [disabled]="!editForm.form.valid">保存题面</button>
+              </nz-form-control>
+            </nz-form-item>
+          </form>
+        </ng-container>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- 右边的内容 -->
+  <div class="problem-edit-right container" nz-col nzSpan="6">
+    <div class="problem-edit-right-content">
+      <h3>上传题目说明：</h3>
+      <p>请先完善题目内容后，再上传评测数据。</p>
+      <p>时间限制的单位为 ms，1s = 1000ms 。</p>
+      <p>内存限制的单位为 Mb，1MB = 1024 Kb = 1024*1024 b 。</p>
+      <p>题目描述、输入和输出描述都支持markdown语法。</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #problemUpload>
+  <div class="problem-edit-upload-form-container"> 
+    <h3>上传压缩包的要求：</h3>
+    <p>直接将若干数据点打包成一个 zip 压缩包，其他格式不能成功。</p>
+    <p>没有任何文件夹或者其他无关文件，压缩后大小不超过 50M。</p>
+    <p>测试点顺序及输入输出文件将被系统自动识别。为保证识别成功，建议使用易于识别的文件名，如"game1.in", "game1.out"。</p>
+    <nz-upload
+      nzType="drag"
+      [nzLimit]="1"
+      [nzSize]="51200"
+      [nzFileType]="'zip'"
+      nzAction="https://jsonplaceholder.typicode.com/posts/"
+      [nzShowUploadList]="true"
+    >
+      <p class="ant-upload-drag-icon">
+        <i nz-icon nzType="inbox"></i>
+      </p>
+      <p class="ant-upload-text">点击或者拖拽文件上传</p>
+      <p class="ant-upload-hint">
+        只支持 .zip 文件，不超过 50M
+      </p>
+    </nz-upload>
+  </div>
+
+  
+</ng-template>

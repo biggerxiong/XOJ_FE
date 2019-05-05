@@ -17,7 +17,7 @@ import { NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS } from 'ng-zorro-antd';
 import { httpInterceptorProviders } from "./interceptors/index";
 
 // 引入你需要的图标，比如你需要 fill 主题的 AccountBook Alert 和 outline 主题的 Alert，推荐 ✔️
-import { BookFill, TrophyFill, PieChartFill, HomeFill, MailOutline, SmileTwoTone, SyncOutline, FrownTwoTone } from '@ant-design/icons-angular/icons';
+import { CloudUploadOutline, EditOutline, PlusOutline, BookFill, TrophyFill, PieChartFill, HomeFill, MailOutline, SmileTwoTone, SyncOutline, FrownTwoTone } from '@ant-design/icons-angular/icons';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -28,8 +28,15 @@ import { SubmitFormComponent } from './submit-form/submit-form.component';
 import { NzDropDownModule } from 'ng-zorro-antd';
 import { NzModalModule } from 'ng-zorro-antd';
 import { StatusComponent } from './pages/problem/status/status.component';
+import { EditComponent } from './pages/problem/edit/edit.component';
+import { NzStepsModule } from 'ng-zorro-antd';
+import { NzInputNumberModule } from 'ng-zorro-antd';
+import { NzUploadModule } from 'ng-zorro-antd';
 
-const icons: IconDefinition[] = [ HomeFill, BookFill, TrophyFill, PieChartFill, MailOutline, SmileTwoTone, SyncOutline, FrownTwoTone ];
+const icons: IconDefinition[] = [ HomeFill, BookFill, TrophyFill, 
+  PieChartFill, MailOutline, SmileTwoTone, 
+  SyncOutline, FrownTwoTone, PlusOutline,
+  EditOutline, CloudUploadOutline];
 
 registerLocaleData(zh);
 
@@ -43,7 +50,8 @@ registerLocaleData(zh);
     ProblemsComponent,
     ProblemComponent,
     SubmitFormComponent,
-    StatusComponent
+    StatusComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +62,10 @@ registerLocaleData(zh);
     BrowserAnimationsModule,
     ReactiveFormsModule,
     NzDropDownModule,
-    NzModalModule
+    NzModalModule,
+    NzStepsModule,
+    NzInputNumberModule,
+    NzUploadModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN },

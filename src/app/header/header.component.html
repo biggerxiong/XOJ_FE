@@ -1,7 +1,7 @@
 <nz-header style="position:fixed; width:100%; z-index: 1000;">
   <div class="logo"></div>
   <ul class="nav-ul" nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
-    <li routerLink='/home'  nz-menu-item>
+    <li nz-menu-item routerLink='/home'>
       <i nz-icon nzType="home" nzTheme="fill"></i>
       主页
     </li>
@@ -16,6 +16,10 @@
     <li nz-menu-item>
       <i nz-icon nzType="pie-chart" nzTheme="fill"></i>
       记录
+    </li>
+    <li nz-menu-item routerLink='/problem/new'>
+      <i nz-icon nzType="pie-chart" nzTheme="fill"></i>
+      创建
     </li>
     <li class="nav-right" nz-menu-item>
       <button *ngIf="!loggedIn" routerLink='/login' class="nav-login-bt" nz-button [nzType]="'default'" [nzGhost]="true" [nzSize]="'large'">登陆</button>
