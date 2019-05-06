@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProblemDetail } from 'src/app/problemDetail';
 import { GlobalMessageService } from 'src/app/service/global-message.service';
 import { ProblemService } from 'src/app/problem.service';
+import { UploadFilter, UploadFile } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-edit',
@@ -40,10 +41,8 @@ export class EditComponent implements OnInit {
         .subscribe(result => {
           this.problemDetail = result.data
           const jsonArray = JSON.parse(this.problemDetail.samples)
-          console.log("jsonArray: ", jsonArray)
           for (let i in jsonArray) {
             const element = jsonArray[i]
-            console.log("element:", element)
             this.testCases.push({"input": element['input'], "output": element['output']})
           }
         })
@@ -95,6 +94,16 @@ export class EditComponent implements OnInit {
     else {
       this.testCases.push({"input": "", "output": ""})
       this.testCaseCount++
+    }
+  }
+
+  handleChange({ file, fileList }: { [key: string]: any }): void {
+    const status = file.status;
+
+    if (status === 'done') {
+      this.globalMessageService.createSuccessMessage(`${file.name} 上传成功，数据分发需 5 ~ 10 分钟`);
+    } else if (status === 'error') {
+      this.globalMessageService.createErrorMessage(`${file.name} 上传失败`);
     }
   }
 }
