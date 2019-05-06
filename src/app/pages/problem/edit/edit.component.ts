@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProblemDetail } from 'src/app/problemDetail';
 import { GlobalMessageService } from 'src/app/service/global-message.service';
+import { ProblemService } from 'src/app/problem.service';
 
 @Component({
   selector: 'app-edit',
@@ -16,18 +17,37 @@ export class EditComponent implements OnInit {
   current: number = 0
   isLoading: boolean = false
   problemDetail: ProblemDetail = new ProblemDetail()
-  testCases: any = [{"input": "", "output": ""}]
+  testCases: any = []
   testCaseCount: number = 1
+  problemId: number
 
   constructor(
     private route: ActivatedRoute,
-    private globalMessageService: GlobalMessageService
+    private globalMessageService: GlobalMessageService,
+    private problemService: ProblemService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.mode = +this.route.snapshot.data.current;
-    this.problemDetail.timeLimit = 1000
-    this.problemDetail.memoryLimit = 128
+    if (this.mode == 0) {
+      this.problemDetail.timeLimit = 1000
+      this.problemDetail.memoryLimit = 128
+    }
+    else {
+      this.problemId = +this.route.snapshot.paramMap.get('id')
+      this.problemService.getProblemDetail(this.problemId)
+        .subscribe(result => {
+          this.problemDetail = result.data
+          const jsonArray = JSON.parse(this.problemDetail.samples)
+          console.log("jsonArray: ", jsonArray)
+          for (let i in jsonArray) {
+            const element = jsonArray[i]
+            console.log("element:", element)
+            this.testCases.push({"input": element['input'], "output": element['output']})
+          }
+        })
+    }
   }
 
   changeStep(stepId: number) {
@@ -41,7 +61,7 @@ export class EditComponent implements OnInit {
   }
 
   submitForm() {
-    this.problemDetail.memoryLimit = this.problemDetail.memoryLimit * 1024 * 1024
+    this.isLoading = true
     // 去除测试样例中输入输出都为空的
     for (let i = 0; i < this.testCases.length; i++) {
       const element = this.testCases[i];
@@ -50,7 +70,22 @@ export class EditComponent implements OnInit {
       }
     }
     this.problemDetail.samples = JSON.stringify(this.testCases)
-    console.log(this.problemDetail)
+    if (this.mode == 0) {
+      this.problemService.createProblem(this.problemDetail)
+        .subscribe(result => {
+          this.problemDetail = result.data
+          this.globalMessageService.createSuccessMessage("创建成功")
+          this.isLoading = false
+          this.router.navigateByUrl('/problem/edit/' + this.problemDetail.problemId)
+        })
+    } else {
+      this.problemService.editProblem(this.problemDetail, this.problemId)
+        .subscribe(result => {
+          this.problemDetail = result.data
+          this.globalMessageService.createSuccessMessage("修改成功")
+          this.isLoading = false
+        })
+    }
   }
 
   addTestCase() {

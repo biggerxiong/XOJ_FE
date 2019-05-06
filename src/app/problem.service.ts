@@ -23,6 +23,8 @@ export class ProblemService {
   private problemListUrl = "http://localhost:8090/problems"
   private problemDetailUrl = "http://localhost:8090/problem/"
   private judgeStatusUrl = "http://localhost:8090/status/"
+  private createProblemUrl = "http://localhost:8090/problem/new"
+  private editProblemUrl = "http://localhost:8090/problem/edit/"
 
   constructor(
     private http: HttpClient,
@@ -44,5 +46,13 @@ export class ProblemService {
     const submitCodeTemp: SubmitCode = new SubmitCode(submitCode.languageId, encodeURIComponent(submitCode.source), submitCode.problemId)
     // submitCodeTemp.source = encodeURIComponent(submitCodeTemp.source)
     return this.http.post<Result>(this.submitUrl, submitCodeTemp)
+  }
+
+  createProblem(problemDetail: ProblemDetail): Observable<Result> {
+    return this.http.post<Result>(this.createProblemUrl, problemDetail)
+  }
+
+  editProblem(problemDetail: ProblemDetail, problemId: number): Observable<Result> {
+    return this.http.post<Result>(this.editProblemUrl + problemId, problemDetail)
   }
 }

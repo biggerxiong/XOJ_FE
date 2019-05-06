@@ -15,6 +15,12 @@
           <form nz-form #editForm="ngForm">
             <!-- 题目id -->
             <input hidden name="problemId" [(ngModel)]="problemDetail.problemId">
+            <nz-form-item *ngIf="mode == 1" >
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="title">前台查看</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24">
+                <a routerLink="/problem/{{ problemDetail.problemId }}">查看</a>
+              </nz-form-control>
+            </nz-form-item>
             <!-- 题目名称 -->
             <nz-form-item>
               <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="title">题目名称</nz-form-label>
@@ -42,28 +48,28 @@
             </nz-form-item>
             <!-- 题目描述 -->
             <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description">题目描述</nz-form-label>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="descriptionMarkdown">题目描述</nz-form-label>
               <nz-form-control [nzSm]="14" [nzXs]="24">
-                <textarea nz-input id="description" [(ngModel)]="problemDetail.description" 
-                  name="description" [nzAutosize]="{ minRows: 5, maxRows: 15 }" placeholder="支持markdown语法，可以使用图床哦"> 
+                <textarea nz-input id="descriptionMarkdown" [(ngModel)]="problemDetail.descriptionMarkdown" 
+                  name="descriptionMarkdown" [nzAutosize]="{ minRows: 5, maxRows: 15 }" placeholder="支持markdown语法，可以使用图床哦"> 
                 </textarea>
               </nz-form-control>
             </nz-form-item>
             <!-- 输入描述 -->
             <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="inputDescription">输入描述</nz-form-label>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="inputDescriptionMarkdown">输入描述</nz-form-label>
               <nz-form-control [nzSm]="14" [nzXs]="24">
-                <textarea nz-input id="inputDescription" [(ngModel)]="problemDetail.inputDescription" 
-                  name="inputDescription" [nzAutosize]="{ minRows: 5, maxRows: 15 }">
+                <textarea nz-input id="inputDescriptionMarkdown" [(ngModel)]="problemDetail.inputDescriptionMarkdown" 
+                  name="inputDescriptionMarkdown" [nzAutosize]="{ minRows: 5, maxRows: 15 }">
                 </textarea>
               </nz-form-control>
             </nz-form-item>
             <!-- 输出描述 -->
             <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="outputDescription">输出描述</nz-form-label>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="outputDescriptionMarkdown">输出描述</nz-form-label>
               <nz-form-control [nzSm]="14" [nzXs]="24">
-                <textarea nz-input id="outputDescription" [(ngModel)]="problemDetail.outputDescription" 
-                  name="outputDescription" [nzAutosize]="{ minRows: 5, maxRows: 15 }">
+                <textarea nz-input id="outputDescriptionMarkdown" [(ngModel)]="problemDetail.outputDescriptionMarkdown" 
+                  name="outputDescriptionMarkdown" [nzAutosize]="{ minRows: 5, maxRows: 15 }">
                 </textarea>
               </nz-form-control>
             </nz-form-item>
@@ -89,10 +95,10 @@
             </nz-form-item>
             <!-- 提示与说明 -->
             <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="hint">提示与说明</nz-form-label>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="hintMarkdown">提示与说明</nz-form-label>
               <nz-form-control [nzSm]="14" [nzXs]="24">
-                <textarea nz-input id="hint" [(ngModel)]="problemDetail.hint" 
-                  name="hint" [nzAutosize]="{ minRows: 5, maxRows: 15 }" placeholder="记得填上数据范围哦">
+                <textarea nz-input id="hintMarkdown" [(ngModel)]="problemDetail.hintMarkdown" 
+                  name="hhintMarkdownint" [nzAutosize]="{ minRows: 5, maxRows: 15 }" placeholder="记得填上数据范围哦">
                 </textarea>
               </nz-form-control>
             </nz-form-item>

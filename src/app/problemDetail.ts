@@ -7,8 +7,12 @@ export class ProblemDetail {
     description: string;
     inputDescription: string;
     outputDescription: string;
+    descriptionMarkdown: string;
+    inputDescriptionMarkdown: string;
+    outputDescriptionMarkdown: string;
     samples: string;
     hint: string;
+    hintMarkdown: string;
     submit: number;
     accept: number;
     createTime: string;
