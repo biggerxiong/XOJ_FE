@@ -32,7 +32,7 @@
         </div>
   
         <!-- 代码提示 -->
-        <div *ngIf="problemHint === ''" >
+        <div *ngIf="problemHint" >
           <div class="problem-display-title">提示</div>
           <div class="problem-display-content" [innerHTML]="problemHint"></div>
         </div>
