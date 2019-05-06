@@ -4,6 +4,7 @@ import { ProblemDetail } from 'src/app/problemDetail';
 import { GlobalMessageService } from 'src/app/service/global-message.service';
 import { ProblemService } from 'src/app/problem.service';
 import { UploadFilter, UploadFile } from 'ng-zorro-antd';
+import { GlobalUrlService } from 'src/app/service/global-url.service';
 
 @Component({
   selector: 'app-edit',
@@ -21,12 +22,14 @@ export class EditComponent implements OnInit {
   testCases: any = []
   testCaseCount: number = 1
   problemId: number
+  fileUploadUrl: string
 
   constructor(
     private route: ActivatedRoute,
     private globalMessageService: GlobalMessageService,
     private problemService: ProblemService,
-    private router: Router
+    private router: Router,
+    private globalUrlService: GlobalUrlService
   ) { }
 
   ngOnInit() {
@@ -46,6 +49,8 @@ export class EditComponent implements OnInit {
             this.testCases.push({"input": element['input'], "output": element['output']})
           }
         })
+        
+      this.fileUploadUrl = this.globalUrlService.getUploadTestCaseUrl(this.problemId)
     }
   }
 

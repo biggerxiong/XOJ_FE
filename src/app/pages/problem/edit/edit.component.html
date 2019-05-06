@@ -141,7 +141,7 @@
       [nzSize]="51200"
       (nzChange)="handleChange($event)"
       [nzFileType]="'application/x-zip-compressed'"
-      nzAction="http://localhost:8090/upload/data/{{ problemId }}"
+      nzAction="{{fileUploadUrl}}"
       [nzShowUploadList]="true"
     >
       <p class="ant-upload-drag-icon">
