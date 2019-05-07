@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
   loginCallback(code: number, msg: string) {
     if (code === 1) {
       this.globalMessageService.createSuccessMessage("登陆成功")
-      this.router.navigateByUrl('/problems')
+      this.router.navigateByUrl('/home')
     }
     else {
       this.isLoginFailed = true
