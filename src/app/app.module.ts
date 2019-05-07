@@ -3,8 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
-import { FormsModule } from '@angular/forms';
+import { NZ_I18N, zh_CN, NgZorroAntdModule } from 'ng-zorro-antd';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
@@ -22,16 +21,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ProblemsComponent } from './problems/problems.component';
-import { ProblemComponent } from './problem/problem.component';
-import { SubmitFormComponent } from './submit-form/submit-form.component';
-import { NzDropDownModule } from 'ng-zorro-antd';
-import { NzModalModule } from 'ng-zorro-antd';
-import { StatusComponent } from './pages/problem/status/status.component';
-import { EditComponent } from './pages/problem/edit/edit.component';
-import { NzStepsModule } from 'ng-zorro-antd';
-import { NzInputNumberModule } from 'ng-zorro-antd';
-import { NzUploadModule } from 'ng-zorro-antd';
+import { SharedModule } from './shared.module';
 
 const icons: IconDefinition[] = [ HomeFill, BookFill, TrophyFill, 
   PieChartFill, MailOutline, SmileTwoTone, 
@@ -46,33 +36,23 @@ registerLocaleData(zh);
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-    HomeComponent,
-    ProblemsComponent,
-    ProblemComponent,
-    SubmitFormComponent,
-    StatusComponent,
-    EditComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgZorroAntdModule,
-    FormsModule,
+    // NgZorroAntdModule,
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    NzDropDownModule,
-    NzModalModule,
-    NzStepsModule,
-    NzInputNumberModule,
-    NzUploadModule
+    SharedModule.forRoot()
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN },
     { provide: NZ_ICON_DEFAULT_TWOTONE_COLOR, useValue: '#00ff00' }, // 不提供的话，即为 Ant Design 的主题蓝色
-    { provide: NZ_ICONS, useValue: icons },
-    httpInterceptorProviders
+    { provide: NZ_ICONS, useValue: icons }
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProblemService } from "../problem.service";
-import { ProblemIntro } from '../problemIntro';
+import { ProblemIntro } from 'src/app/problemIntro';
+import { ProblemService } from 'src/app/problem.service';
 
 @Component({
   selector: 'app-problems',

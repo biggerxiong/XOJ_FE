@@ -2,12 +2,11 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { ProblemService }  from '../problem.service';
-import { ProblemDetail } from '../problemDetail';
+import { ProblemService }  from '../../problem.service';
+import { ProblemDetail } from '../../problemDetail';
 import { DomSanitizer } from '@angular/platform-browser';
-import { SubmitCode } from '../model/submit/submit-code';
-import { JudgeStatus } from '../model/submit/judge-status';
-import { User } from '../model/User';
+import { JudgeStatus } from '../../model/submit/judge-status';
+import { User } from '../../model/User';
 
 @Component({
   selector: 'app-problem',
