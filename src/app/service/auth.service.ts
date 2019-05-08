@@ -19,6 +19,7 @@ const httpOptions = {
 export class AuthService {
   private loggedIn = false
   private currentUser: User
+  private expiredTime: number
 
   constructor(private router: Router, 
     private globalUrlService: GlobalUrlService,
@@ -31,7 +32,7 @@ export class AuthService {
     if (token) {
       this.loggedIn = true
       this.currentUser = this.decodeUserFromToken(token)
-      console.log(this.currentUser)
+      this.expiredTime = this.decodeExpiredTimeFromToken(token)
     }
   }
 
@@ -45,6 +46,13 @@ export class AuthService {
     return user
   }
 
+  decodeExpiredTimeFromToken(token: string): number {
+    const jsonString = atob(token.split('.')[1])
+    const jsonObject = JSON.parse(jsonString)
+    const expiredTime: number = Number.parseInt(jsonObject['expiredTime'])
+    return expiredTime
+  }
+
   login(userName: string, password: string, callback: Function) {
     
     this.http.post<Result>(this.globalUrlService.getLoginUrl(),
@@ -55,6 +63,7 @@ export class AuthService {
           localStorage.setItem("token", token)
           this.loggedIn = true
           this.currentUser = this.decodeUserFromToken(token)
+          this.expiredTime = this.decodeExpiredTimeFromToken(token)
         }
         callback(result.code, result.msg)
       })
@@ -72,5 +81,9 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return this.loggedIn
+  }
+
+  isExpired(): boolean {
+    return new Date().getTime() > this.expiredTime
   }
 }

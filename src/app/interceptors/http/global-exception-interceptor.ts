@@ -31,10 +31,27 @@ export class GlobalExceptionInterceptor implements HttpInterceptor {
             ,catchError((res: HttpResponse<any>) => {
                 switch (res.status) {
                     case 401:
+                        // jwt过期会返回401
+                        break;
                     case 403:
-                        // 权限处理
-                        this.router.navigateByUrl('/login')
-                        this.authService.logout()
+                        if (this.authService.isLoggedIn()) {
+                            // 如果处于登陆状态，判断是否过期
+                            if (this.authService.isExpired()) {
+                                this.globalMessageService.createErrorMessage(`登陆过期，请重新登陆`);
+                                this.router.navigateByUrl('/login')
+                                this.authService.logout()
+                            }
+                            // 如果没过期，说明没有权限
+                            else {
+                                this.globalMessageService.createErrorMessage(`您没有权限访问该页面`);
+                            }
+                        }
+                        else {
+                            // 如果没有登陆，则去登陆
+                            this.globalMessageService.createErrorMessage(`请先登录`);
+                            this.router.navigateByUrl('/login')
+                            // this.authService.logout()
+                        }
                         break;
                     // case 200:
                     //     // 业务层级错误处理
