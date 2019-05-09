@@ -4,16 +4,17 @@ import { Injectable, OnInit } from '@angular/core';
   providedIn: 'root'
 })
 export class GlobalUrlService{
-  protocol: string = "https://"
-  address: string = "api.xoj.ac.cn"
-  port: string
-  prefixUrl: string
-  dist = "/oj"
-  // protocol: string = "http://"
-  // address: string = "localhost"
-  // port: string = "8090"
+  // protocol: string = "https://"
+  // address: string = "api.xoj.ac.cn"
+  // port: string
   // prefixUrl: string
-  // dist = ""
+  // dist = "/oj"
+  protocol: string = "http://"
+  address: string = "localhost"
+  port: string = "8090"
+  prefixUrl: string
+  dist = ""
+
   loginUrl = "/login"
   uploadTestCaseUrl = "/upload/data/{problemId}"
   submitUrl = "/submit"
@@ -22,6 +23,7 @@ export class GlobalUrlService{
   judgeStatusUrl = "/status/{judgeStatusId}"
   createProblemUrl = "/problem/new"
   editProblemUrl = "/problem/edit/{problemId}"
+  headerRouterListUrl = "/config/header/list"
 
   constructor() {
     this.prefixUrl = this.protocol + this.address
@@ -62,5 +64,9 @@ export class GlobalUrlService{
 
   getSubmitUrl() {
     return this.prefixUrl + this.submitUrl
+  }
+
+  getHeaderRouterListUrl() {
+    return this.prefixUrl + this.headerRouterListUrl
   }
 }

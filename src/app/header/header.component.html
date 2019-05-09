@@ -1,7 +1,13 @@
 <nz-header style="position:fixed; width:100%; z-index: 1000;">
   <div class="logo"></div>
   <ul class="nav-ul" nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
-    <li nz-menu-item routerLink='/home'>
+    <!-- <div  > -->
+      <li class="nav-left" nz-menu-item routerLink='{{ item.routerLink }}' *ngFor="let item of routerInfoList">
+        <i nz-icon nzType="{{ item.iconType }}" nzTheme="{{ item.iconTheme }}"></i>
+        {{ item.routerName }}
+      </li>
+    <!-- </div> -->
+    <!-- <li nz-menu-item routerLink='/home'>
       <i nz-icon nzType="home" nzTheme="fill"></i>
       主页
     </li>
@@ -20,7 +26,7 @@
     <li nz-menu-item routerLink='/problem/new'>
       <i nz-icon nzType="pie-chart" nzTheme="fill"></i>
       创建
-    </li>
+    </li> -->
     <li class="nav-right" nz-menu-item>
       <button *ngIf="!loggedIn" routerLink='/login' class="nav-login-bt" nz-button [nzType]="'default'" [nzGhost]="true" [nzSize]="'large'">登陆</button>
       <nz-dropdown *ngIf="loggedIn" [nzPlacement]="'bottomCenter'" >
