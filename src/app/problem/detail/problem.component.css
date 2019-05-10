@@ -40,7 +40,7 @@ pre {
     border: 1px dashed #bae7ff;
 }
 
-code {
+pre>code {
     display: block;
     overflow: auto;
     background: #f4f4f4;
@@ -48,6 +48,12 @@ code {
     border: 1px solid #eee;
     word-wrap:break-word; 
     white-space: pre-wrap; 
+}
+
+code {
+    display: inline;
+    background: #f4f4f4;
+    padding: 0 5px;
 }
 
 .problem-display-judge-status {
