@@ -1,6 +1,6 @@
 <div class="problem-list-container">
   <div *ngIf="problemIntros">
-    <nz-table #basicTable [nzData]="problemIntros" >
+    <nz-table #basicTable [nzData]="problemIntros" [nzFrontPagination]="false">
       <thead>
         <tr>
           <th>编号</th>
