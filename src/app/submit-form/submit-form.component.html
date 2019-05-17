@@ -17,12 +17,12 @@
     <nz-form-item class="form-group">
       <nz-form-label [nzSpan]="4" nzFor="codeArea" [nzRequired]="true">代码</nz-form-label>
       <nz-form-control [nzSpan]="18">
-          <textarea nzSize="large" rows="10" nz-input class="form-code-area" [(ngModel)]="submitCode.source" id="codeArea" name="source" required #source="ngModel">
+        <textarea nzSize="large" rows="10" nz-input class="form-code-area" [(ngModel)]="submitCode.source" id="codeArea" name="source" required #source="ngModel">
 
-          </textarea>
-          <nz-form-explain *ngIf="!(source.valid || source.pristine)" class="alert alert-danger">
-            代码不能为空
-          </nz-form-explain>
+        </textarea>
+        <nz-form-explain *ngIf="!(source.valid || source.pristine)" class="alert alert-danger">
+          代码不能为空
+        </nz-form-explain>
       </nz-form-control>
        
     </nz-form-item>
@@ -32,5 +32,13 @@
       </nz-form-control>
     </nz-form-item>
     <!-- <button type="submit" class="btn btn-success">Submit</button> -->
+    <nz-form-item nz-row>
+      <nz-form-control [nzSpan]="14" [nzOffset]="2">
+        <div *ngIf="isAccept"  style="color:#5eb95e">
+          <i nz-icon [nzType]="'smile'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#52c41a'"></i>
+          你已经通过了这道题哦
+        </div>
+      </nz-form-control>
+    </nz-form-item>
   </form>
 </div>

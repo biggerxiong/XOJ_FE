@@ -3,6 +3,7 @@ import { CodeLanguage } from '../model/submit/code-language';
 import { SubmitCode } from '../model/submit/submit-code';
 import { ProblemService } from '../problem.service';
 import { JudgeStatus } from '../model/submit/judge-status';
+import { JudgeStatusService } from '../service/judge-status.service';
 
 
 @Component({
@@ -14,6 +15,7 @@ export class SubmitFormComponent implements OnInit {
   @Input() problemId: number
   @Output() update = new EventEmitter<number>()
   isLoading = false
+  isAccept = false
 
   languages: CodeLanguage[] = [
     new CodeLanguage(1, "G++"),
@@ -25,12 +27,18 @@ export class SubmitFormComponent implements OnInit {
   submitCode: SubmitCode = new SubmitCode(1, "", this.problemId);
 
   constructor(
-    private problemService: ProblemService
+    private problemService: ProblemService,
+    private judgeStatusService: JudgeStatusService
   ) { }
 
   ngOnInit() {
     this.submitCode.problemId = this.problemId
     this.submitCode.languageId = 1
+
+    this.judgeStatusService.problemIsAccept(this.problemId)
+      .subscribe(res => {
+        this.isAccept = res.data
+      })
   }
 
   submitProblem() {
