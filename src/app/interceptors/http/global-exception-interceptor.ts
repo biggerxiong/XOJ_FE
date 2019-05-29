@@ -6,6 +6,7 @@ import { mergeMap, catchError } from "rxjs/operators";
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
+import { Result } from 'src/app/model/http/result';
 
 @Injectable()
 export class GlobalExceptionInterceptor implements HttpInterceptor {
@@ -22,9 +23,20 @@ export class GlobalExceptionInterceptor implements HttpInterceptor {
         
         return <any>next.handle(req).pipe(
             mergeMap((event: any) => {
-                if (event instanceof HttpResponse && event.status !== 200) {
-                    console.log("event: ", event)
-                    return Observable.create(observer => observer.error(event));
+                if (event instanceof HttpResponse) {
+                    // 请求成功
+                    if (event.status === 200) {
+                        // console.log("event: ", event)
+                        var result: Result = event.body
+                        // 请求成功但服务器返回失败
+                        if (result.code !== 1) {
+                            this.globalMessageService.createErrorMessage(result.msg);
+                            return Observable.create(observer => observer.error(event));
+                        }
+                    }
+                    else {
+                        return Observable.create(observer => observer.error(event));
+                    }
                 }
                 return Observable.create(observer => observer.next(event));
             })
@@ -32,7 +44,7 @@ export class GlobalExceptionInterceptor implements HttpInterceptor {
                 switch (res.status) {
                     case 401:
                         // jwt过期会返回401
-                        break;
+                        // break;
                     case 403:
                         if (this.authService.isLoggedIn()) {
                             // 如果处于登陆状态，判断是否过期
@@ -55,7 +67,8 @@ export class GlobalExceptionInterceptor implements HttpInterceptor {
                         break;
                     // case 200:
                     //     // 业务层级错误处理
-                    //     this.globalMessageService.createErrorMessage(`发生错误，错误信息为：${res.body.msg}`);
+                    //     // this.globalMessageService.createErrorMessage(`发生错误，错误信息为：${res.body.msg}`);
+                    //     console.log('res:', res)
                     //     break;
                     case 404:
                         this.globalMessageService.createErrorMessage(`API不存在`);
