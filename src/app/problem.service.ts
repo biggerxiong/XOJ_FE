@@ -34,6 +34,10 @@ export class ProblemService {
     return this.http.get<Result>(this.globalUrlService.getProblemDetailUrl(id));
   }
 
+  getProblemEditDetail(id: number): Observable<Result> {
+    return this.http.get<Result>(this.globalUrlService.getProblemEditDetailUrl(id));
+  }
+
   getJudgeStatus(id: number): Observable<Result> {
     return this.http.get<Result>(this.globalUrlService.getJudgeStatusUrl(id));
   }

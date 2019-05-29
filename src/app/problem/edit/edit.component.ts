@@ -40,7 +40,7 @@ export class EditComponent implements OnInit {
     }
     else {
       this.problemId = +this.route.snapshot.paramMap.get('id')
-      this.problemService.getProblemDetail(this.problemId)
+      this.problemService.getProblemEditDetail(this.problemId)
         .subscribe(result => {
           this.problemDetail = result.data
           const jsonArray = JSON.parse(this.problemDetail.samples)
