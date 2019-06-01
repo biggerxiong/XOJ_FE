@@ -16,7 +16,7 @@ import { NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS } from 'ng-zorro-antd';
 import { httpInterceptorProviders } from "./interceptors/index";
 
 // 引入你需要的图标，比如你需要 fill 主题的 AccountBook Alert 和 outline 主题的 Alert，推荐 ✔️
-import { CloudUploadOutline, EditOutline, PlusOutline, BookFill, TrophyFill, PieChartFill, HomeFill, MailOutline, SmileTwoTone, SyncOutline, FrownTwoTone } from '@ant-design/icons-angular/icons';
+import { CloudUploadOutline, EditOutline, PlusOutline, BookFill, TrophyFill, PieChartFill, HomeFill, MailOutline, SmileTwoTone, SyncOutline, FrownTwoTone, FilterFill, FolderAddFill, CrownFill } from '@ant-design/icons-angular/icons';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -26,7 +26,8 @@ import { SharedModule } from './shared.module';
 const icons: IconDefinition[] = [ HomeFill, BookFill, TrophyFill, 
   PieChartFill, MailOutline, SmileTwoTone, 
   SyncOutline, FrownTwoTone, PlusOutline,
-  EditOutline, CloudUploadOutline];
+  EditOutline, CloudUploadOutline, FilterFill,
+  FolderAddFill, CrownFill];
 
 registerLocaleData(zh);
 
