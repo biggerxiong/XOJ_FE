@@ -5,10 +5,10 @@ import { EditComponent } from './edit/edit.component';
 import { ProblemsComponent } from './list/problems.component';
 
 const routes: Routes = [
-  { path: 'list', component: ProblemsComponent},
   { path: 'new', component: EditComponent, data: {current: 0}},
   { path: 'edit/:id', component: EditComponent, data: {current: 1}},
-  { path: ':id',component: ProblemComponent }
+  { path: ':id',component: ProblemComponent },
+  { path: '', component: ProblemsComponent}
 ];
 
 @NgModule({
