@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { ProblemService }  from '../../problem.service';
@@ -7,6 +7,7 @@ import { ProblemDetail } from '../../problemDetail';
 import { DomSanitizer } from '@angular/platform-browser';
 import { JudgeStatus } from '../../model/submit/judge-status';
 import { User } from '../../model/User';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-problem',
@@ -39,16 +40,19 @@ export class ProblemComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.problemService.getProblemDetail(id)
-      .subscribe(result => {
-        this.problemDetail = result.data;
-        this.problemInputDescription = this.sanitizer.bypassSecurityTrustHtml(this.problemDetail.inputDescription);
-        this.problemOutputDescription = this.sanitizer.bypassSecurityTrustHtml(this.problemDetail.outputDescription);
-        this.problemHint = this.sanitizer.bypassSecurityTrustHtml(this.problemDetail.hint);
-        this.problemDescription = this.sanitizer.bypassSecurityTrustHtml(this.problemDetail.description);
-        this.samples = JSON.parse(this.problemDetail.samples.replace("\n", "\\r\\n"))
-      });
+    var problemObservable = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
+        this.problemService.getProblemDetail(+params.get('id'))
+      )
+    );
+    problemObservable.subscribe(result => {
+      this.problemDetail = result.data;
+      this.problemInputDescription = this.sanitizer.bypassSecurityTrustHtml(this.problemDetail.inputDescription);
+      this.problemOutputDescription = this.sanitizer.bypassSecurityTrustHtml(this.problemDetail.outputDescription);
+      this.problemHint = this.sanitizer.bypassSecurityTrustHtml(this.problemDetail.hint);
+      this.problemDescription = this.sanitizer.bypassSecurityTrustHtml(this.problemDetail.description);
+      this.samples = JSON.parse(this.problemDetail.samples.replace("\n", "\\r\\n"))
+    });
   }
 
   updateJudgeStatus(judgeStatusId: number) {
