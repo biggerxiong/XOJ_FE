@@ -22,10 +22,12 @@ export class GlobalUrlService{
   problemDetailUrl = "/problem/{problemId}"
   problemEditDetailUrl = "/problem/edit/{problemId}"
   judgeStatusUrl = "/status/{judgeStatusId}"
+  judgeStatusListUrl = "/status"
   createProblemUrl = "/problem/new"
   editProblemUrl = "/problem/edit/{problemId}"
   headerRouterListUrl = "/config/header/list"
   problemIsAcceptUrl = "/status/is_accept/{problemId}"
+  
 
   constructor() {
     this.prefixUrl = this.protocol + this.address
@@ -70,6 +72,10 @@ export class GlobalUrlService{
 
   getJudgeStatusUrl(judgeStatusId: number) {
     return this.prefixUrl + this.judgeStatusUrl.replace('{judgeStatusId}', judgeStatusId.toString())
+  }
+
+  getJudgeStatusListUrl() {
+    return this.prefixUrl + this.judgeStatusListUrl;
   }
 
   getSubmitUrl() {

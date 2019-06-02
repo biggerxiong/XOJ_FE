@@ -1,0 +1,35 @@
+<div class="status-list-container">
+  <nz-table #nzTable [nzData]="judgeStatusList" 
+    [nzLoading]="loading" 
+    [nzFrontPagination]="false"
+    [nzNoResult]="noResultString"
+    [nzShowSizeChanger]="true"
+    [nzPageSizeOptions]="pageSizeOptions">
+
+    <thead>
+      <tr>
+        <th>Judge ID</th>
+        <th>UserName</th>
+        <th>ProblemId</th>
+        <th>Score</th>
+        <th>Time(ms)</th>
+        <th>Memory(MB)</th>
+        <th>Language</th>
+        <th>Submit Time</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let data of nzTable.data" >
+        <td>{{ data.judgeStatusId }}</td>
+        <td>{{ data.user.userName }}</td>
+        <td><a routerLink="/problem/{{ data.problem.problemId }}">{{ data.problem.problemId }}</a></td>
+        <td>{{ data.score }}</td>
+        <td>{{ data.timeCost }}</td>
+        <td>{{ getPercent(data.memoryCost / 1024 / 1024) }}</td>
+        <td>{{ data.language.languageName }}</td>
+        <td>{{ data.createTime }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

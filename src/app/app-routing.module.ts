@@ -8,6 +8,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'problem', loadChildren: './problem/problem.module#ProblemModule'},
+  {path: 'status', loadChildren: './status/status.module#StatusModule'},
   {path: '**', component: HomeComponent}
 ];
 

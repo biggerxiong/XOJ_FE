@@ -22,6 +22,7 @@ import { SubmitFormComponent } from './submit-form/submit-form.component';
 import { FormsModule } from '@angular/forms';
 import { ProblemService } from './problem.service';
 import { httpInterceptorProviders } from './interceptors';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { httpInterceptorProviders } from './interceptors';
     NzUploadModule,
   ],
   exports: [
+    HttpClientModule,
     FormsModule,
     CommonModule,
     SubmitFormComponent,
