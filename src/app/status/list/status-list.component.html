@@ -4,7 +4,10 @@
     [nzFrontPagination]="false"
     [nzNoResult]="noResultString"
     [nzShowSizeChanger]="true"
-    [nzPageSizeOptions]="pageSizeOptions">
+    [nzPageSizeOptions]="pageSizeOptions"
+    [nzTotal]="page.totalElements"
+    [nzPageIndex]="page.number"
+    >
 
     <thead>
       <tr>

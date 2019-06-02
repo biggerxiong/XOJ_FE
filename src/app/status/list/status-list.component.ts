@@ -4,6 +4,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { JudgeStatusService } from 'src/app/service/judge-status.service';
 import { JudgeStatus } from 'src/app/model/submit/judge-status';
+import { Page } from 'src/app/model/http/page';
 
 @Component({
   selector: 'app-status-list',
@@ -14,11 +15,12 @@ export class StatusListComponent implements OnInit {
 
   noResultString = "没有符合条件的记录"
   pageSizeOptions = [10, 30, 50, 100]
-
+  page: Page = new Page()
 
   judgeStatusFilterRequest: JudgeStatusFilterRequest = new JudgeStatusFilterRequest()
   judgeStatusList: JudgeStatus[] = []
   loading: boolean = true
+  rows: number
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +48,8 @@ export class StatusListComponent implements OnInit {
     )
 
     judgeStatusListObservable.subscribe(result => {
-      this.judgeStatusList = result.data
+      this.page = result.data
+      this.judgeStatusList = this.page.content
       console.log("judgeStatusList: ", this.judgeStatusList)
       this.loading = false
     })
