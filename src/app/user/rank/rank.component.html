@@ -1,0 +1,37 @@
+<div class="rank-container">
+    <nz-table #nzTable [nzData]="rankList" 
+    [nzLoading]="loading" 
+    [nzFrontPagination]="false"
+    [nzShowSizeChanger]="true"
+    [nzPageSizeOptions]="pageSizeOptions"
+    [nzTotal]="pageResult.totalElements"
+    [nzPageIndex]="pageResult.number"
+    (nzPageSizeChange)="onPageSizeChange($event)"
+    (nzPageIndexChange)="onPageIndexChange($event)"
+    >
+
+    <thead>
+      <tr>
+        <th>排名</th>
+        <th>用户名</th>
+        <th>姓名</th>
+        <th>通过</th>
+        <th>提交</th>
+        <th>正确率</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let data of nzTable.data;let i=index" >
+        <td>{{ this.page * 10 +i + 1 }}</td>
+        <td>{{ data.userName }}</td>
+        <!-- <td><a routerLink="/problem/{{ data.problem.problemId }}">{{ data.problem.problemId }}</a></td> -->
+        <td>{{ data.nickName }}</td>
+        <td>{{ data.accept }}</td>
+        <td>{{ data.submit }}</td>
+        <td>{{ getPercent(data.accept, data.submit) }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
+

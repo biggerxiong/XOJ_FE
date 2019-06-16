@@ -27,6 +27,7 @@ export class GlobalUrlService{
   editProblemUrl = "/problem/edit/{problemId}"
   headerRouterListUrl = "/config/header/list"
   problemIsAcceptUrl = "/status/is_accept/{problemId}"
+  rankListUrl = "/user/rank"
   
 
   constructor() {
@@ -48,6 +49,10 @@ export class GlobalUrlService{
 
   getLoginUrl(): string {
     return this.prefixUrl + this.loginUrl
+  }
+
+  getRankListUrl(): string {
+    return this.prefixUrl + this.rankListUrl
   }
 
   getUploadTestCaseUrl(problemId: number) {
