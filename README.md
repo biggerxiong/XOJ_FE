@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # OnlineJudgeFE
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
@@ -25,3 +26,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+=======
+# XOJ_FE
+XOJ在线评测系统前端， https://xoj.ac.cn
+>>>>>>> 425817b312f2873e3a3ced6bad5c95aa397bf4ab
